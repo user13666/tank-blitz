@@ -1,0 +1,155 @@
+@use "./../../elementsStyling/views-elements/radio-ui" as *;
+@use "./../../elementsStyling/swg-icons" as *;
+@use "./../../elementsStyling/views-elements/menu-ui" as *;
+@use "./../../elementsStyling/views-elements/page-ui" as *;
+@use "./../../elementsStyling/views-elements/input-values" as *;
+@use "./../../elementsStyling/views-elements/switched-button" as *;
+@use "./../../elementsStyling/tegify" as *;
+
+@include radio-ui($color: #efefef, $activeColor: #2d86a7, $text: #292929, $activeText: #efefef);
+
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: var(--c-green);
+
+  &-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #ffffff2a;
+  }
+
+  &-thumb {
+    background-color: var(--c-green-dark);
+  }
+}
+
+body {
+  --user-teg-c: #ffffff;
+  --c-yellow-light: #30b4e4;
+  --c-yellow: #0c7fa8;
+  --c-yellow-dark: #0c5a76;
+
+  --c-green-light: #414856;
+  --c-green: #303641;
+  --c-green-dark: #353c48;
+
+  --c-shadow-dark: #2c3139;
+  --c-shadow-light: #4f586a;
+
+  --c-white: white;
+
+  --c-grey-light: #cecece;
+  --c-grey: #858585;
+  --c-grey-dark: #585858;
+
+  --c-grey-shadow-dark: #00000094;
+  --c-grey-shadow-light: #ffffff38;
+}
+
+body {
+  --r-t-box-shadow: 5px 5px 10px #242931, -4px -4px 8px #3c4351, inset 1px 1px 1px rgba(255, 255, 255, 0.1);
+  --m-b-shadow-inset:
+    inset 0 0 10px var(--c-grey-shadow-dark), inset 0 1px 1px #0a0b0de0, 0px 1px var(--c-grey-shadow-light);
+}
+
+body {
+  --r-t-col-width-min: 10%;
+  --r-t-col-width-max: 40%;
+}
+
+body,
+html {
+  margin: 0px;
+  padding: 0px;
+  font-family: sans-serif;
+  color: var(--c-grey-light);
+  background: var(--c-green-light);
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+@include page-ui($nav-bar-width: 250px,
+  $c-heder: var(--c-green),
+  $c-bar-dark: #2c3139,
+  $c-bar: #2c3139,
+  $c-bar-light: #4f586a,
+  $c-color: var(--c-white),
+  $c-hover: var(--c-yellow-light),
+  $n-box-shadow: var(--r-t-box-shadow));
+
+.content ul,
+.content li {
+  overflow: visible;
+}
+
+.extension {
+  @include menu-ui($navbar-min-height: 56px,
+    $navbar-min-width: 60px,
+    $navbar-background-color: var(--c-shadow-dark),
+    $navbar-box-shadow: 0 1px 1px var(--c-shadow-light),
+    $navbar-color-bar: var(--c-yellow),
+    $navbar-border: 0.5px solid var(--c-shadow-light),
+    $navbar-color: var(--c-yellow),
+    $navbar-text-shadow: 0px 0.3px 1px var(--c-green-dark));
+}
+
+@include input-values(var(--c-yellow), var(--c-green-dark));
+
+.switchedBlock {
+  @include switched-button($c-text: var(--c-green-dark),
+    $c-switched-btn: var(--c-green-light),
+    $c-switched-bg: var(--c-yellow));
+  top: 25px;
+  left: 60px;
+  width: calc(40% - 60px);
+  min-width: 142px;
+
+  &-container {
+    position: fixed;
+    z-index: 4;
+    margin: 5px;
+    padding: 2px;
+
+    &.block {
+      position: relative;
+      margin: 4px;
+      box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0px 0px 0px 1px rgba(255, 255, 255, 0.09);
+    }
+  }
+
+  &-type {
+    padding: 8px 3px;
+    color: white;
+  }
+
+  &-checkboxInput {
+    top: 0px;
+  }
+}
+
+#control-panel {
+  display: none;
+}
+
+#filter-pages:checked {
+  &~#filter-list {
+    display: none;
+  }
+
+  &~#control-panel {
+    display: block;
+  }
+}
+
+.clanList {
+  width: calc(100% - 110px);
+  @include tegify-ui();
+}
+
+.user-tags {
+  width: calc(100% - 81px);
+  height: auto;
+}

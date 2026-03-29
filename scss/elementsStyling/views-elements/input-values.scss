@@ -1,0 +1,56 @@
+@mixin input-values($c-yellow, $c-green-dark) {
+  // input val
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  .setting-values {
+    &__div {
+      position: relative;
+    }
+    &__label {
+      transition: all 2s ease;
+      opacity: 0;
+      display: block;
+      color: $c-yellow;
+      font-weight: 600;
+      font-size: 12px;
+      position: absolute;
+      top: 0;
+    }
+    &__input {
+      width: 74px;
+      height: 27px;
+      outline: none;
+      padding: 2px 8px;
+      margin: 2px;
+      border: none;
+      border-radius: 2px;
+      font-size: 12px;
+      font-weight: 600;
+      background-color: $c-yellow;
+      color: $c-yellow;
+    }
+
+    &__input:not(:placeholder-shown) + &__label {
+      transition: all 2s ease;
+      opacity: 1;
+    }
+
+    &__input:not(:placeholder-shown) {
+      margin-top: 20px;
+      transition: all 2s ease;
+      border: 2px solid $c-yellow;
+      background: $c-green-dark;
+      color: $c-yellow;
+    }
+  }
+}

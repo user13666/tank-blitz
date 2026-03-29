@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Market-history</title>
+  <link rel="stylesheet" href="./../../css/iconselect.css">
+  <link rel="stylesheet" href="./../../css/tagify.css">
+  <link rel="stylesheet" href="./../../css/flatpickr.min.css">
+  <link rel="stylesheet" href="./../../css/flatpickr-dark.css">
+  <link rel="stylesheet" href="./../../css/views/history.css">
+  <link rel="stylesheet" href="./../../css/views/market-history.css">
+
+</head>
+
+<body>
+  <input class="switchedBlock-checkboxInput" type="checkbox" id="item-type">
+  <div class="nav-block">
+    <ul class="nav-mobile">
+      <li class="menu-header">
+        <div class="menu-header-text">
+          <div class="menu-header-bar"></div>
+          Market-history
+        </div>
+        <ul class="menu-header-block">
+          <a href="./home.html">
+            <li class="swg-home menu-header-block-link"></li>
+          </a>
+          <a href="./clans.html">
+            <li class="swg-timeline menu-header-block-link"></li>
+          </a>
+        </ul>
+      </li>
+
+      <li class="menu-container">
+        <input id="menu-toggle" type="checkbox">
+        <label for="menu-toggle" class="menu-button">
+          <div class="swg-menu filter-nav-btn filter-nav-btn-open"></div>
+          <div class="swg-close filter-nav-btn filter-nav-btn-close"></div>
+        </label>
+
+        <input class="switchedBlock-checkboxInput" type="checkbox" id="filter-pages">
+        <div class="switchedBlock-container switchedBlock">
+
+          <label for="filter-pages" class="switchedBlock-label">
+            <div class="switchedBlock-type light">
+              <span class="switchedBlock-inputText">Панель</span>
+            </div>
+            <div class="switchedBlock-type dark">
+              <span class="switchedBlock-inputText">Настройки</span>
+            </div>
+          </label>
+        </div>
+        <ul class="menu-sidebar nav nav__list" id="filter-list">
+
+
+
+
+          <div class="switchedBlock-container block">
+            <select name="selectClan" id="selectClan" class="extension-data-block select-clan"></select>
+            <label for="item-type" class="switchedBlock-label" style="display: flex;" id="item-type-label">
+              <div class="switchedBlock-type light">
+                <span class="switchedBlock-inputText">Пользователь</span>
+              </div>
+              <div class="switchedBlock-type dark">
+                <span class="switchedBlock-inputText">Поиск</span>
+              </div>
+            </label>
+
+
+            <a id="loadUsers" style="float: left; margin: 15px 10px; width: 90px;">
+              <div class="swg-bookmark-add extension-nav-icon  extension-nav-icon_min extension-nav-icon_menu">
+              </div>
+              Загрузить
+            </a>
+            <input class="settings-input settings-input-number select-global-date" placeholder="Выбрать дату..."
+              id="userDate" />
+            <a id="savePoints" style="float: right; margin: 15px 10px; width: 120px;">
+              <div class="swg-save extension-nav-icon  extension-nav-icon_min extension-nav-icon_menu">
+              </div>
+              Сохранить КЗ
+            </a>
+            <!-- <div class="extension-data-block extension-data-block-info" id="extension_info">
+
+            </div> -->
+          </div>
+
+          <div id="search-panel">
+
+
+            <li>
+              <!-- <button class="extension-search-btn" id="search-in-list-btn">
+                <span class="swg-search extension-search-btn-icon"></span>
+              </button>
+
+              <input type="text" class="extension-search" placeholder="Поиск" id="search-in-list" /> -->
+            </li>
+
+            <li style="padding: 20px 11px;">
+              <input class="clanList user-tags" name='search-tags'>
+              <a id="find_tags" style="float: right;  margin: 0px 10px;">
+                <div class="swg-search extension-nav-icon  extension-nav-icon_min extension-nav-icon_menu"
+                  style="margin: 0px 12px;">
+                </div>
+              </a>
+            </li>
+
+            <li>
+              <div class="button-wrap" id="users-radio">
+                <input class="hidden radio-label" type="radio" name="users-list" id="all-users-list" value="all"
+                  checked="checked" />
+                <label class="button-label" for="all-users-list"> все </label>
+                <input class="hidden radio-label" type="radio" name="users-list" id="in-clan" value="in-clan" />
+                <label class="button-label" for="in-clan"> состоят (+) </label>
+                <input class="hidden radio-label" type="radio" name="users-list" id="not-in-clan" value="not-in-clan" />
+                <label class="button-label" for="not-in-clan"> не состоят (-) </label>
+              </div>
+            </li>
+
+
+          </div>
+
+          <div id="user-panel">
+            <li>
+              <div class="extension-data-block extension-data-block-msg"
+                style=" font-size: 17px; color: #3f3f3f; font-weight: 700;" id="account-name"></div>
+            </li>
+
+            <li style=" padding: 20px 11px;">
+              <input class="clanList user-tags member" style="display: none;" name='member'>
+              <a id="saveTags" style="float: right;  margin: 0px 10px; display: none;">
+                <div class="swg-save extension-nav-icon  extension-nav-icon_min extension-nav-icon_menu"
+                  style="margin: 0px 12px;">
+                </div>
+              </a>
+            </li>
+
+            <div class="extension-data-block extension-data-block-info stats-chart"></div>
+
+            <li>
+              <div class="selected-item-prices" id="account-statistic"></div>
+
+              <div class="stats-pagination"></div>
+
+              <div class="selected-item-prices" id="account-point"></div>
+            </li>
+
+          </div>
+
+        </ul>
+
+        <ul class="menu-sidebar nav nav__list" id="control-panel">
+        </ul>
+      </li>
+    </ul>
+    <div class="extension-progress">
+      <div class="extension-bar" style="width: 0%;"></div>
+    </div>
+
+  </div>
+
+
+  <div class="content content-nav-is-open">
+
+    <div class="side-front" id="table-users">
+      <ul class="extension-responsive-table list">
+
+        <li class="extension-responsive-table__header extension-responsive-table-li">
+          <p class="extension-responsive-table__col extension-responsive-table__col_width-max">
+            Имя
+          </p>
+          <div class="extension-responsive-table__col extension-responsive-table__col_width-min">
+            Вступил
+          </div>
+          <div class="extension-responsive-table__col extension-responsive-table__col_width-min">
+            Онлаин
+          </div>
+          <div class="extension-responsive-table__col extension-responsive-table__col_width-min">
+            Бои
+          </div>
+          <div class="extension-responsive-table__col extension-responsive-table__col_width-min">
+            Победы
+          </div>
+          <div class="extension-responsive-table__col extension-responsive-table__col_width-min">
+            Урон
+          </div>
+          <div
+            class="extension-responsive-table__col_hidden-block extension-responsive-table__col extension-responsive-table__col_width-min">
+            Диаграмма
+          </div>
+          <div class="extension-responsive-table__col extension-responsive-table__col_width-min">
+            Очки
+          </div>
+        </li>
+
+
+
+      </ul>
+      <ul class="extension-pagination">
+      </ul>
+    </div>
+    <div class="side-back" id="all-users">
+      <ul class="extension-responsive-table list">
+
+        <li class="extension-responsive-table__header extension-responsive-table-li">
+          <p class="extension-responsive-table__col extension-responsive-table__col_width-min">
+            Имя
+          </p>
+          <div class="extension-responsive-table__col extension-responsive-table__col_width-min">
+            Группа
+          </div>
+          <div class="extension-responsive-table__col extension-responsive-table__col_width-min">
+            Состоит
+          </div>
+          <div class="extension-responsive-table__col extension-responsive-table__col_width-min">
+            Диаграмма
+          </div>
+        </li>
+
+
+
+      </ul>
+      <ul class="extension-pagination">
+      </ul>
+    </div>
+    <footer> </footer>
+  </div>
+  <script src="./../../js/popup-scripts/views/tests-data.js"></script>
+  <script src="./../../js/modules/iconselect.js"></script>
+  <script src="./../../js/modules/tagify.js"></script>
+  <script src="./../../js/modules/flatpickr.js"></script>
+  <script src="./../../js/modules/charts/hammer.min.js"></script>
+  <script src="./../../js/modules/charts/moment-with-locales.min.js"></script>
+  <script src="./../../js/modules/charts/chart.js"></script>
+  <script src="./../../js/modules/charts/chartjs-adapter-moment.min.js"></script>
+  <script src="./../../js/modules/charts/chartjs-plugin-zoom.min.js"></script>
+  <script src="./../../js/modules/charts/chartjs-plugin-annotation.min.js"></script>
+  <script src="./../../js/modules/charts/stats-chart.js"></script>
+  <script src="./../../js/modules/charts/mini-chart.js"></script>
+  <script src="./../../js/modules/dexie4.2.1.js"></script>
+  <script crc="./../../js/modules/async.min.js"></script>
+  <script src="./../../js/popup-scripts/views/block-resizing.js"></script>
+  <script src="./../../js/modules/purify.js"></script>
+  <script src="./../../js/modules/HttpRequest.js"></script>
+  <script src="./../../js/modules/changeDom.js"></script>
+  <script src="./../../js/modules/externalFunctions.js"></script>
+  <script src="./../../js/popup-scripts/views/jw-paginate.js"></script>
+  <script src="./../../js/popup-scripts/views/pagination.js"></script>
+  <script src="./../../js/popup-scripts/views/clans.js"></script>
+</body>
+
+</html>

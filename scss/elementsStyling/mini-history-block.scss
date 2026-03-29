@@ -1,0 +1,41 @@
+.market_my_listing_buy_tab,
+.market_my_listing_sell_tab {
+  margin: 0px 8px;
+  width: 140px !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .market_listing_right_cell.market_listing_my_price.market_my_listing_sell_tab,
+  .market_listing_right_cell.market_listing_my_price.market_my_listing_buy_tab {
+    display: none !important;
+  }
+}
+
+/* таблица цен */
+.market_commodity_orders_table {
+  display: inline-flex !important;
+  font-size: 12px;
+}
+
+.market_commodity_orders_table th {
+  margin: 0;
+  min-width: none !important;
+  text-align: center;
+  font-weight: normal;
+  font-size: 12px !important;
+}
+
+.market_commodity_orders_table td {
+  min-width: min-content !important;
+  text-align: center;
+}
+
+th:first-child,
+th:first-child + th {
+  display: none;
+}
+
+.min_size_table {
+  margin-top: -15px !important;
+  margin-bottom: -15px !important;
+}

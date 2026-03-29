@@ -1,0 +1,40 @@
+.side-back {
+  display: none;
+}
+
+/* Когда чекбокс нажат (активен режим редактирования) */
+.state-toggle:checked~.side-front {
+  display: none;
+}
+
+.state-toggle:checked~.side-back {
+  overflow: visible;
+  display: block;
+}
+
+.extension-responsive-table #user-panel {
+  display: none;
+}
+
+#search-panel {
+  display: none;
+}
+
+body:has(#item-type:checked) {
+
+  & #table-users {
+    display: none;
+  }
+
+  & #all-users {
+    display: block;
+  }
+
+  & #user-panel {
+    display: none;
+  }
+
+  & #search-panel {
+    display: block;
+  }
+}

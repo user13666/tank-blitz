@@ -1,0 +1,46 @@
+//The good stuff
+.tooltip-toggle {
+  cursor: pointer;
+  position: relative;
+
+  img {
+    height: 44px;
+    width: 44px;
+  }
+
+  //Tooltip text container
+  &::before {
+    z-index: 4;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(61, 68, 80, 0.99);
+    border-radius: 5px;
+    color: #fff;
+    content: attr(aria-label); //This pulls in the text from the element with the tooltip
+    padding: 6px;
+    text-transform: none;
+    transition: all 0.5s ease;
+    max-width: 120px;
+    word-wrap: break-word;
+  }
+
+  //Setting up the transition
+  &::before,
+  &::after {
+    color: #efefef;
+    font-family: monospace;
+    font-size: 13px;
+    font-weight: 700;
+    opacity: 0;
+    pointer-events: none;
+    text-align: center;
+  }
+
+  //Triggering the transition
+  &:hover::before,
+  &:hover::after {
+    opacity: 1;
+    transition: all 0.75s ease;
+  }
+}

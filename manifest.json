@@ -1,0 +1,46 @@
+{
+  "name": "__MSG_applicationTitle__",
+  "description": "__MSG_applicationDescription__",
+  "version": "1.4.8",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": {
+      "16": "/images/16x16.png",
+      "32": "/images/32x32.png",
+      "48": "/images/48x48.png",
+      "128": "/images/128x128.png"
+    },
+    "default_title": "tank blitz",
+    "default_popup": "/html/popup.html"
+  },
+  "icons": {
+    "16": "/images/16x16.png",
+    "32": "/images/32x32.png",
+    "48": "/images/48x48.png",
+    "128": "/images/128x128.png"
+  },
+  "content_scripts": [],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "js/modules/injectionScript.js",
+        "js/modules/injectionFiles/*",
+        "images/*"
+      ],
+      "matches": [
+        "*://api.blitzstats.ru/*"
+      ]
+    }
+  ],
+  "default_locale": "en",
+  "permissions": [
+    "storage",
+    "unlimitedStorage"
+  ],
+  "host_permissions": [
+    "*://api.blitzstats.ru/*"
+  ]
+}

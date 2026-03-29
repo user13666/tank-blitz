@@ -1,0 +1,82 @@
+@mixin progress-line-ui(
+  $progress-height: 18px,
+  $void-background-color: #f7f7f7,
+  $full-background-color: #0e90d2,
+  $void-background-image-start: #f5f5f5,
+  $void-background-image-end: #f9f9f9,
+  $full-background-image-start: #149bdf,
+  $full-background-image-end: #0480be,
+  $progress-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1)
+) {
+  &-progress {
+    overflow: hidden;
+    height: $progress-height;
+
+    background-color: $void-background-color;
+    background-image: -moz-linear-gradient(top, $void-background-image-start, $void-background-image-end);
+    background-image: -ms-linear-gradient(top, $void-background-image-start, $void-background-image-end);
+    background-image: -webkit-gradient(
+      linear,
+      0 0,
+      0 100%,
+      from($void-background-image-start),
+      to($void-background-image-end)
+    );
+    background-image: -webkit-linear-gradient(top, $void-background-image-start, $void-background-image-end);
+    background-image: -o-linear-gradient(top, $void-background-image-start, $void-background-image-end);
+    background-image: linear-gradient(top, $void-background-image-start, $void-background-image-end);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(
+      startColorstr='$void-background-image-start',
+      endColorstr='$void-background-image-end',
+      GradientType=0
+    );
+
+    -webkit-box-shadow: $progress-box-shadow;
+    -moz-box-shadow: $progress-box-shadow;
+    box-shadow: $progress-box-shadow;
+
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+  }
+
+  &-progress &-bar {
+    width: 0%;
+    height: 18px;
+
+    background-color: $full-background-color;
+    background-image: -moz-linear-gradient(top, $full-background-image-start, $full-background-image-end);
+    background-image: -ms-linear-gradient(top, $full-background-image-start, $full-background-image-end);
+    background-image: -webkit-gradient(
+      linear,
+      0 0,
+      0 100%,
+      from($full-background-image-start),
+      to($full-background-image-end)
+    );
+    background-image: -webkit-linear-gradient(top, $full-background-image-start, $full-background-image-end);
+    background-image: -o-linear-gradient(top, $full-background-image-start, $full-background-image-end);
+    background-image: linear-gradient(top, $full-background-image-start, $full-background-image-end);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(
+      startColorstr='$full-background-image-start',
+      endColorstr='$full-background-image-end',
+      GradientType=0
+    );
+
+    -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    -webkit-transition: width 0.6s ease;
+    -moz-transition: width 0.6s ease;
+    -ms-transition: width 0.6s ease;
+    -o-transition: width 0.6s ease;
+    transition: width 0.6s ease;
+  }
+}

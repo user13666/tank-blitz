@@ -1,0 +1,120 @@
+/* Используем переменные для легкой настройки */
+.icon-select {
+    --selected-size: 48px;
+    --icon-size: 32px;
+    --gap: 4px;
+    --radius: 3px;
+    --border-color: #000000;
+    --bg-main: #7a7a7a;
+    --columns: 3;
+
+    display: inline-flex;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    width: auto;
+    /* Убрал width: 0, чтобы компонент был виден */
+}
+
+/* Общие стили для боксов и иконок */
+.selected-box,
+.icon-select-box,
+.icon-item {
+    border-radius: var(--radius);
+}
+
+/* Выбранное состояние (шапка) */
+.selected-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-main);
+    transition: border-color 0.2s;
+}
+
+.selected-box:hover {
+    border-color: #000;
+}
+
+.selected-icon img {
+    width: var(--selected-size);
+    height: var(--selected-size);
+    display: block;
+}
+
+/* Иконка стрелочки */
+.component-icon {
+    display: flex;
+    align-items: center;
+}
+
+.component-icon svg {
+    width: 20px;
+    transition: transform 0.4s;
+}
+
+/* Выпадающий список */
+.icon-select-box {
+    position: absolute;
+    top: 105%;
+    /* Небольшой отступ от шапки */
+    left: 0;
+    z-index: 100;
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    padding: var(--gap);
+
+    /* Сетка */
+    display: none;
+    grid-template-columns: repeat(var(--columns), 1fr);
+    gap: var(--gap);
+
+    /* Скролл только справа */
+    max-height: 170px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.icon-select.drop-up .icon-select-box {
+    top: auto;
+    /* Обязательно сбрасываем стандартный top */
+    bottom: 105%;
+    /* Прижимаем к верху контейнера */
+    margin-top: 0;
+    margin-bottom: 5px;
+    /* Небольшой зазор сверху */
+}
+
+/* Состояние при открытии */
+.icon-select.open .icon-select-box {
+    display: grid;
+}
+
+.icon-select.open .component-icon svg {
+    transform: rotate(180deg);
+}
+
+/* Элементы списка */
+.icon-item {
+    padding: 4px;
+    border: 1px solid transparent;
+    transition: all 0.1s;
+}
+
+.icon-item img {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    display: block;
+}
+
+.icon-item:hover {
+    border-color: #30b4e4;
+    background-color: #626262;
+}
+
+.icon-item.selected {
+    background: #626262;
+    border-color: #30b4e4;
+}

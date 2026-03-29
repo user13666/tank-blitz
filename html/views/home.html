@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <link rel="stylesheet" href="./../../css/tagify.css">
+  <link rel="stylesheet" href="./../../css/views/home.css">
+
+</head>
+
+<body>
+
+  <div class="nav-block">
+    <ul class="nav-mobile">
+      <li class="menu-header">
+        <div class="menu-header-text">
+          <div class="menu-header-bar"></div>
+          Home
+        </div>
+        <ul class="menu-header-block">
+          <a href="./home.html">
+            <li class="swg-home menu-header-block-link"></li>
+          </a>
+          <a href="./clans.html">
+            <li class="swg-timeline menu-header-block-link"></li>
+          </a>
+
+        </ul>
+      </li>
+
+      <li class="menu-container">
+        <input id="menu-toggle" type="checkbox">
+        <label for="menu-toggle" class="menu-button">
+          <div class="swg-menu filter-nav-btn filter-nav-btn-open"></div>
+          <div class="swg-close filter-nav-btn filter-nav-btn-close"></div>
+        </label>
+
+        <ul class="menu-sidebar nav nav__list" id="filter-list">
+
+
+          <li>
+            <a class="statistics">
+              <div
+                class="swg-bookmark-remove extension-nav-icon  extension-nav-icon_min statistics-nav-icon_min extension-nav-icon_menu">
+              </div>
+              <span class="statistics-name">History</span> <span class="statistics-value" id="historyCount">0</span>
+            </a>
+          </li>
+          <li>
+            <a class="statistics">
+              <div
+                class="swg-bookmark-added extension-nav-icon  extension-nav-icon_min statistics-nav-icon_min extension-nav-icon_menu">
+              </div>
+              <span class="statistics-name">Purchase</span> <span class="statistics-value" id="purchaseCount">0</span>
+            </a>
+          </li>
+
+          <li>
+            <a class="statistics">
+              <div
+                class="swg-problem extension-nav-icon  extension-nav-icon_min statistics-nav-icon_min extension-nav-icon_menu">
+              </div>
+              <span class="statistics-name">D... Groups</span> <span class="statistics-value"
+                id="dangerousGroupsCount">0</span>
+            </a>
+          </li>
+        </ul>
+
+      </li>
+    </ul>
+    <div class="extension-progress">
+      <div class="extension-bar" style="width: 0%;"></div>
+    </div>
+
+  </div>
+
+
+  <div class="content content-nav-is-open">
+
+
+    <div class="extension-tabs">
+
+      <input type="radio" name="tabs" id="tab-global" checked>
+      <label class="tabs-label" for="tab-global">global</label>
+      <div class="ui-tab">
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+  </div>
+
+
+
+
+
+
+  </div>
+
+
+
+
+  </div>
+  <script src="./../../js/localize/localize.js"></script>
+  <script src="./../../js/modules/tagify.js"></script>
+  <script src="./../../js/popup-scripts/views/block-resizing.js"></script>
+  <script src="./../../js/modules/purify.js"></script>
+  <script src="./../../js/modules/externalFunctions.js"></script>
+  <script src="./../../js/modules/changeDom.js"></script>
+  <script src="./../../js/popup-scripts/views/home.js"></script>
+</body>
+
+</html>

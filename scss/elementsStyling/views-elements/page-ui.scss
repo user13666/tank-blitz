@@ -1,0 +1,416 @@
+@use "sass:color";
+
+@mixin button-shadow-inset($menu-button-shadow-inset, $c-bar-dark) {
+  &::before {
+    content: '';
+    inset: 0;
+    position: absolute;
+    transition: 0.5s cubic-bezier(0.81, 1.21, 0.45, 0.8);
+    z-index: -1;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+  }
+
+  &:hover::before {
+    -webkit-box-shadow: $menu-button-shadow-inset;
+    box-shadow: $menu-button-shadow-inset;
+    background: $c-bar-dark;
+  }
+}
+
+@mixin page-ui($nav-bar-width: 250px, $c-heder, $c-bar-dark, $c-bar, $c-bar-light, $c-color, $c-hover, $n-box-shadow) {
+  $menu-button-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.58),
+    0px 0px 0px 1px rgb(255 255 255 / 9%);
+  $menu-button-shadow-inset: inset 2px 2px 4px 0px rgba(0, 0, 0, 0.58),
+    0px 0px 0px 1px rgb(255 255 255 / 9%);
+
+  ul,
+  li {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    overflow: auto;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  /**
+ * Hidden fallback
+ */
+  [hidden] {
+    display: none;
+    visibility: hidden;
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  .content {
+    margin-top: 16px;
+    width: 100%;
+    position: relative;
+    float: right;
+  }
+
+  .content-nav-is-open {
+    width: calc(60% - 10px);
+  }
+
+  @media (max-width:60em) {
+    .content {
+      position: absolute;
+    }
+
+    .content,
+    .content-nav-is-open {
+      width: 100%;
+    }
+  }
+
+  /*-------*/
+
+  .nav-block {
+    position: unset;
+    display: block;
+    height: 45px;
+
+    &__icon {
+      width: 21px;
+      height: 23px;
+    }
+  }
+
+  .nav-mobile {
+    background: $c-heder;
+    color: #fff;
+    padding: 0;
+    margin: 0;
+    cursor: auto;
+    font-size: 13px;
+    list-style-type: none;
+    box-shadow: $n-box-shadow;
+    width: 100%;
+    position: fixed;
+    display: inline-block;
+    z-index: 3;
+
+    &:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+    .filter-nav-btn {
+      height: 21px;
+      width: 21px;
+      top: 7px;
+      left: 7px;
+      position: absolute;
+
+      &-open {
+        display: none;
+        padding: 15px;
+      }
+
+      &-close {
+        display: block;
+      }
+
+      @media (max-width:60em) {
+        &-close {
+          display: none;
+          padding: 15px;
+        }
+
+        &-open {
+          display: block;
+        }
+      }
+    }
+
+    .menu-button {
+      position: absolute;
+      top: 13px;
+      left: 9px;
+      width: 36px;
+      height: 36px;
+      margin: 0;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      -webkit-box-shadow: $menu-button-shadow;
+      box-shadow: $menu-button-shadow;
+      cursor: pointer;
+      display: block;
+
+      &:after {
+        opacity: 0;
+        top: 57px;
+        content: '';
+        width: 100vw;
+        display: block;
+        position: fixed;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        content: '';
+        pointer-events: none;
+        transition: opacity 0.2s cubic-bezier(0, 0, 0.3, 1);
+        transition-delay: 0.1s;
+      }
+
+      @include button-shadow-inset($menu-button-shadow-inset, $c-bar-dark);
+    }
+
+    #menu-toggle {
+      display: none;
+
+      &.active~.menu-button,
+      &:checked~.menu-button {
+        .filter-nav-btn-close {
+          display: none;
+        }
+
+        .filter-nav-btn-open {
+          display: block;
+        }
+
+        @media (max-width:60em) {
+          .filter-nav-btn-close {
+            display: block;
+          }
+
+          .filter-nav-btn-open {
+            display: none;
+          }
+
+          &:after {
+            opacity: 1;
+            pointer-events: auto;
+            transition: opacity 0.3s cubic-bezier(0, 0, 0.3, 1);
+          }
+        }
+      }
+
+      &.active~.menu-sidebar,
+      &:checked~.menu-sidebar {
+        width: 100%;
+        transform: translateX(calc(-100% - 9999999em));
+        transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
+        overflow: auto;
+      }
+
+      @media (max-width:60em) {
+
+        &.active~.menu-sidebar,
+        &:checked~.menu-sidebar {
+          width: 100%;
+          transform: translateX(0px) !important;
+          transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
+          overflow: auto;
+        }
+      }
+    }
+
+    @media (max-width:60em) {
+      .menu-sidebar {
+        transform: translateX(calc(-100% - 9999999em)) !important;
+      }
+    }
+
+    .menu-header {
+      display: flex;
+      height: 76px;
+
+      &-block {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+
+        &-link {
+          height: 43px;
+          margin: 4px;
+          width: 43px;
+          list-style-type: none;
+          background-size: 44px;
+          color: #000;
+          position: relative;
+          text-decoration: none;
+          -webkit-box-shadow: $menu-button-shadow;
+          box-shadow: $menu-button-shadow;
+          -webkit-border-radius: 5px;
+          border-radius: 5px;
+          transition: 1s;
+          @include button-shadow-inset($menu-button-shadow-inset, $c-bar-dark);
+        }
+
+        @media (max-width:60em) {
+          &-link {
+            display: none;
+          }
+        }
+      }
+
+      &-bar {
+        width: 20px;
+        height: 20px;
+        background-color: $c-hover;
+        display: inline;
+        padding-right: 5px;
+        margin-right: 9px;
+      }
+
+      &-text {
+        position: relative;
+        left: 60px;
+        margin-top: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        width: 173px;
+        /* word-spacing: 9999999px; */
+        color: $c-hover;
+      }
+
+      &-my-profile {
+        width: auto;
+        top: 7px;
+        position: absolute;
+        right: 20px;
+      }
+    }
+
+    .menu-container {
+      top: 12px;
+      width: 65px;
+      float: left;
+
+      .menu-sidebar {
+        box-shadow: $n-box-shadow;
+        display: block;
+        width: 40%;
+        top: 81px;
+        left: 8px;
+        border-radius: 5px;
+        bottom: 8px;
+        background: $c-bar-light;
+        color: $c-color;
+        position: fixed;
+        transform: translateX(0px);
+        transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
+        z-index: 2;
+        list-style-type: none;
+        padding: 0;
+        /* max-width: 400px; */
+      }
+    }
+  }
+
+  /**
+ * Styling top level items
+ */
+  .nav a,
+  .nav label {
+    margin: 10px;
+    -webkit-box-shadow: $menu-button-shadow;
+    box-shadow: $menu-button-shadow;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    color: #fff;
+    background-color: color.adjust($c-bar-light, $lightness: -10%);
+    transition: all 0.25s ease-in;
+
+    &:focus,
+    &:hover {
+      box-shadow: $menu-button-shadow-inset;
+      color: rgba(255, 255, 255, 0.5);
+      background: color.adjust($c-bar-light, $lightness: -7%);
+    }
+  }
+
+  .nav label {
+    cursor: pointer;
+  }
+
+  /**
+ * Styling first level lists items
+ */
+  .group-list a,
+  .group-list label {
+    background: color.adjust($c-bar-light, $lightness: -7%);
+    -webkit-box-shadow: $menu-button-shadow;
+    box-shadow: $menu-button-shadow;
+
+    &:focus,
+    &:hover {
+      box-shadow: $menu-button-shadow-inset;
+      background: color.adjust($c-bar-light, $lightness: -14%);
+    }
+  }
+
+  /**
+ * Styling second level list items
+ */
+  .sub-group-list a,
+  .sub-group-list label {
+    background: color.adjust($c-bar-light, $lightness: -14%);
+    -webkit-box-shadow: $menu-button-shadow;
+    box-shadow: $menu-button-shadow;
+
+    &:focus,
+    &:hover {
+      box-shadow: $menu-button-shadow-inset;
+      background: color.adjust($c-bar-light, $lightness: -21%);
+    }
+  }
+
+  /**
+ * Styling third level list items
+ */
+  .sub-sub-group-list a,
+  .sub-sub-group-list label {
+    background: color.adjust($c-bar-light, $lightness: -21%);
+    -webkit-box-shadow: $menu-button-shadow;
+    box-shadow: $menu-button-shadow;
+
+    &:focus,
+    &:hover {
+      box-shadow: $menu-button-shadow-inset;
+      background: color.adjust($c-bar-dark, $lightness: -32%)
+    }
+  }
+
+  /**
+ * Hide nested lists
+ */
+  .group-list,
+  .sub-group-list,
+  .sub-sub-group-list {
+    /* height: 100%; */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+  }
+
+  .nav__list input[type='checkbox']:checked+label+ul {
+    /* reset the height when checkbox is checked */
+    max-height: 1000px;
+  }
+
+  /**
+ * Rotating chevron icon
+ */
+  label>span {
+    float: right;
+    transition: transform 0.65s ease;
+  }
+
+  .nav__list input[type='checkbox']:checked+label>span {
+    transform: rotate(90deg);
+  }
+}

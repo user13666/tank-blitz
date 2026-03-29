@@ -1,0 +1,49 @@
+    sass --watch scss/public:css/
+    npm run compile:sass 
+// Steam order tracking
+
+ctr-alt -t закладки
+
+// chrome-extension://caadaenakboeadadffehdnabljimmphi/html/popup.html
+//https://steamcommunity.com/id/-orders/groups/?ajax=1
+//https://steamcommunity.com/id/-orders/friends?ajax=1
+
+// http://api.steampowered.com/ISteamApps/GetAppList/v0001/ список всех приложений
+//http://api.steampowered.com/IEconItems_730/GetSchema/v0002/?key=5DA40A4A4699DEE30C1C9A7BCE84C914 название предметов и скинов
+
+<path-to-dev-channel-chrome>\chrome.exe --enable-apps --pack- extension=<path\to\app\folder>
+
+Блоки которым я изменяю стили pageModificationBlocks
+Блоки которые я сам добавляю extensionBlocks
+Правила наименования scss:  название_класса-ИмяБлока
+
+animation - анимация
+  scss\animation\checkbox-change-color-text.scss - стиль списка чекбоксов
+  scss\animation\progress-bar.scss - стиль линии загрузки
+
+charts - стиль диаграммы
+  scss\charts\charts.scss
+
+elementsStyling стили различных элементов
+  scss\elementsStyling\create-order-block.scss - стиль блока создания ордера
+  scss\elementsStyling\item-profitable-block.scss - стиль блока который отображает пибыль
+  scss\elementsStyling\mini-history-block.scss - стиль блока истории для сканирования ордера
+  scss\elementsStyling\scrollbar-style.scss - стиль прокрутки страницы
+  scss\elementsStyling\swg-icons.scss - список всех используемых иконок
+  scss\elementsStyling\switch-block.scss - стиль чекбокса в виде переключателя
+
+pages стили модификаций страниц
+  scss\pages\steamcommunityMarket\market.scss - переопределение стилей главной страницы маркета
+  scss\pages\steamcommunityMarketListings\marketListings.scss - переопределение стилей страницы предмета
+  scss\pages\steamcommunityMarketSearch\marketSearch.scss - переопределение стилей страницы поиска
+  scss\pages\storeSteampoweredApp\SteampoweredApp.scss - переопределение стилей страницы приложения в маркете
+
+
+javascript:Forum_BlockUser( '76561198125192376', "AntiQ");
+`javascript:Forum_BlockUser( '76561198125192376, "AntiQ")`.match(/\d+/)[0]
+
+
+ https://steamcommunity.com/market/myhistory?count=100&start=0
+
+
+ npx postcss "css/*.css" --replace --no-map

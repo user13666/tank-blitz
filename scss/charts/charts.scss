@@ -1,0 +1,35 @@
+@use './../animation/checkbox-change-color-text' as *;
+
+.chart {
+  width: auto;
+  background-color: #0000006a;
+  box-shadow: rgb(69 69 69) 0px 3px 8px -1px;
+  text-align: right;
+  transition: 0.3s;
+
+  &-item-page {
+    width: 790px;
+    margin: 0px 11px 10px auto;
+  }
+
+  &-search {
+    width: 790px;
+    display: grid;
+    margin: 0px auto;
+    margin-bottom: 12px;
+  }
+
+  &-navigation {
+    display: inline-block;
+    margin-top: 20px;
+  }
+
+  &-button {
+    background-color: #626262;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    border: none;
+    height: 28px;
+  }
+}
