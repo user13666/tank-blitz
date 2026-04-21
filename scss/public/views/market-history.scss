@@ -6,14 +6,144 @@
 @use "./../../elementsStyling/views-elements/responsive-table" as *;
 @use "./../../elementsStyling/views-elements/page-ui" as *;
 @use "./../../animation/progress-line.scss" as *;
-@use "./../../elementsStyling/views-elements/gradient-box.scss" as *;
 @use "./../../elementsStyling/views-elements/description-settings.scss" as *;
+@use "./../../elementsStyling/views-elements/radio-ui" as *;
+@use "./../../elementsStyling/swg-icons" as *;
+@use "./../../elementsStyling/views-elements/input-values" as *;
+@use "./../../elementsStyling/views-elements/switched-button" as *;
+@use "./../../elementsStyling/tegify" as *;
 
 ::placeholder {
   color: #3f3f3f;
   /* Red color using HEX value, any valid color value works */
   opacity: 1;
   /* Fixes a default lower opacity issue in Firefox */
+}
+
+:root {
+  /* --- 1. ПАЛИТРА (Базовые цвета) --- clr(color)*/
+
+  /* Slate/Blue (Ваши темные и текстовые оттенки) */
+  --clr-slate-900: #2c3139; /* shadow-dark */
+  --clr-slate-800: #303641; /* green */
+  --clr-slate-700: #313845; /* blue-700 */
+  --clr-slate-600: #343e52; /* blue-800 */
+  --clr-slate-500: #353c48; /* green-dark */
+  --clr-slate-400: #414856; /* green-light */
+  --clr-slate-300: #4f586a; /* shadow-light */
+
+  /* Cyan/Blue (Ваши акцентные цвета) */
+  --clr-cyan-500: #00ecff; /* blue-500 */
+  --clr-cyan-600: #3595f6; /* primary из примера */
+  --clr-blue-dark: #0c7fa8; /* был yellow */
+  --clr-blue-deep: #0c5a76; /* был yellow-dark */
+  --clr-blue-soft: #8794a5; /* blue-900 */
+  --clr-blue-light: #dfe8ff; /* blue-100 */
+
+  /* Grayscale */
+  --clr-white: #ffffff;
+  --clr-grey-100: #cecece;
+  --clr-grey-500: #858585;
+  --clr-grey-900: #585858;
+  --clr-black-alpha: #00000094;
+
+  --clr-red-400: #cecece;
+
+  /* --- 2. ФУНКЦИОНАЛЬНЫЕ ПЕРЕМЕННЫЕ (Для дашборда) --- */
+
+  // /* Статусные цвета (семантика) */
+  // --status-info: #3595f6; /* Синий — информация */
+  // --status-success: #28a745; /* Зеленый — успех */
+  // --status-warning: #ffc107; /* Желтый — внимание */
+  // --status-error: #dc3545; /* Красный — ошибка */
+
+  /* цвета блока INFO ? */
+  --info-bg: transparent; /*цвет иконки*/
+  --info-bg-icon: transparent; /* полупрозрачный фон для иконки */
+  --info-border: transparent;
+  --info-shadow: transparent;
+
+  --info-popup-bg: var(--color-slate-800);
+  --info-popup-text: var(--color-white);
+  --info-popup-border: var(--color-slate-600);
+  --info-popup-shadow: var(--color-slate-600);
+  /*----------*/
+
+  /*  блока панели управления pnl (panel) */
+  --pnl-bg: transparent; /*цвет иконки*/
+  --pnl-bg-icon: transparent; /* полупрозрачный фон для иконки */
+  --pnl-border: transparent;
+  --pnl-shadow: transparent;
+
+  --pnl-row-bg: var(--color-slate-800);
+  --pnl-row-text: var(--color-white);
+  --pnl-row-input: var(--color-white);
+  --pnl-row-border: var(--color-slate-600);
+  --pnl-row-shadow: var(--color-slate-600);
+  /*----------*/
+
+  /*  блока панели управления pnl (panel) */
+  --pnl-bg: transparent; /*цвет иконки*/
+  --pnl-bg-icon: transparent; /* полупрозрачный фон для иконки */
+  --pnl-border: transparent;
+  --pnl-shadow: transparent;
+
+  --pnl-row-bg: var(--color-slate-800);
+  --pnl-row-text: var(--color-white);
+  --pnl-row-input: var(--color-white);
+  --pnl-row-border: var(--color-slate-600);
+  --pnl-row-shadow: var(--color-slate-600);
+  /*----------*/
+
+  /*  блока responsive table (rt)*/
+  --rt-bg: transparent; /*цвет иконки*/
+  --rt-bg-icon: transparent; /* полупрозрачный фон для иконки */
+  --rt-border: transparent;
+  --rt-shadow: transparent;
+
+  --rt-row-bg: var(--color-slate-800);
+  --rt-row-text: var(--color-white);
+  --rt-row-input: var(--color-white);
+  --rt-row-border: var(--color-slate-600);
+  --rt-row-shadow-1: var(--color-slate-600);
+  --rt-row-shadow-2: var(--color-slate-600);
+  --rt-row-shadow-3: var(--color-slate-600);
+  /*----------*/
+
+  /* Sidebar */
+  --sb-bg: var(--clr-slate-800);
+  --sb-bg-hover: var(--clr-slate-700);
+  --sb-text: var(--clr-blue-light);
+  --sb-input: var(--clr-blue-light);
+  --sb-accent: var(--clr-cyan-500); //визуальный элемент, который выделяет активные пункты меню
+  --sb-shadow: var(--color-slate-600);
+  --sb-width-collapsed: 80px;
+  --sb-width-expanded: 260px;
+
+  /* Dashboard Content */
+  --db-bg: var(--clr-slate-900);
+  --db-card-bg: var(--clr-slate-700);
+  --db-text-main: var(--clr-white);
+  --db-text-muted: var(--clr-blue-soft);
+
+  /* button */
+  --btn-bg: var(--clr-slate-800);
+  --btn-bg-hover: var(--clr-slate-700);
+  --btn-text: var(--clr-blue-light);
+  --btn-shadow: var(--color-slate-600);
+  --btn-shadow-hover: var(--color-slate-600);
+  --btn-icon: 70px;
+  --btn-width-min: 80px;
+  --btn-width-max: 260px;
+
+  /* User Tag (то, что вы просили) */
+  --tag-user-bg: var(--clr-cyan-600);
+  --tag-user-text: var(--clr-white);
+  --tag-user-radius: 4px;
+  --tag-user-pad: 0.2em 0.6em;
+
+  /* Shadows */
+  --shadow-main: 0 4px 12px var(--clr-black-alpha);
 }
 
 :root {
@@ -24,12 +154,113 @@
   --c-blue-300: #00c7ff;
   --c-blue-200: #869cb5;
   --c-blue-100: #dfe8ff;
-  --c-сyan-400: #30b4e4;
+
+  --c-cyan-400: #30b4e4;
+
+  --user-teg-c: #ffffff;
+  --c-yellow-light: #30b4e4;
+  --c-yellow: #0c7fa8;
+  --c-yellow-dark: #0c5a76;
+
+  --c-green-light: #414856;
+  --c-green: #303641;
+  --c-green-dark: #353c48;
+
+  --c-shadow-dark: #2c3139;
+  --c-shadow-light: #4f586a;
+
+  --c-white: white;
+
+  --c-grey-light: #cecece;
+  --c-grey: #858585;
+  --c-grey-dark: #585858;
+
+  --c-grey-shadow-dark: #00000094;
+  --c-grey-shadow-light: #ffffff38;
+
+  --r-t-box-shadow: 5px 5px 10px #242931, -4px -4px 8px #3c4351, inset 1px 1px 1px rgba(255, 255, 255, 0.1);
+  --m-b-shadow-inset: inset 0 0 10px var(--c-grey-shadow-dark), inset 0 1px 1px #0a0b0de0, 0px 1px var(--c-grey-shadow-light);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: var(--c-green);
+
+  &-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #ffffff2a;
+  }
+
+  &-thumb {
+    background-color: var(--c-green-dark);
+  }
 }
 
 body {
   --r-t-col-width-min: 9%;
   --r-t-col-width-max: 24%;
+}
+
+body,
+html {
+  margin: 0px;
+  padding: 0px;
+  font-family: sans-serif;
+  color: var(--c-grey-light);
+  background: var(--c-green-light);
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+$config: (
+  "bg": #efefef,
+  "bg-active": #2d86a7,
+  "text": #292929,
+  "text-active": #efefef,
+  "radius": 0.25em
+);
+
+@include radio-ui($config);
+@include page-ui($nav-bar-width: 250px, $c-heder: var(--c-green), $c-bar-dark: #2c3139, $c-bar: #2c3139, $c-bar-light: #4f586a, $c-color: var(--c-white), $c-hover: var(--c-yellow-light), $n-box-shadow: var(--r-t-box-shadow));
+
+// @include page-ui($nav-bar-width: 250px, $c-heder: var(--c-green), $c-bar-dark: #2c3139, $c-bar: #2c3139, $c-bar-light: #4f586a, $c-color: var(--c-white), $c-hover: var(--c-yellow-light), $n-box-shadow: var(--r-t-box-shadow));
+
+.content ul,
+.content li {
+  overflow: visible;
+}
+
+@include input-values(var(--c-yellow), var(--c-green-dark));
+
+@include switched-button($c-text: var(--c-green-dark), $c-switched-btn: var(--c-green-light), $c-switched-bg: var(--c-yellow));
+
+#control-panel {
+  display: none;
+}
+
+#filter-pages:checked {
+  & ~ #filter-list {
+    display: none;
+  }
+
+  & ~ #control-panel {
+    display: block;
+  }
+}
+
+.clanList {
+  width: calc(100% - 110px);
+  @include tegify-ui();
+}
+
+.user-tags {
+  width: calc(100% - 81px);
+  height: auto;
+  margin: 9px;
 }
 
 .point-container {
@@ -39,19 +270,17 @@ body {
   overflow: auto;
 }
 
-.extension {
-  @include gradient-box();
+.ext {
   @include description-settings();
+  @include responsive-table((radial-gradient(circle at 30% 30%, rgb(156 45 91 / 11%) 0%, rgb(48 180 228 / 2%) 50%), linear-gradient(244deg, #373e4b 0%, #303641 50%, rgb(49 65 80) 100%)), var(--c-yellow-light), var(--r-t-box-shadow), var(--r-t-col-width-min), var(--r-t-col-width-max));
+}
 
-  @include responsive-table((radial-gradient(circle at 30% 30%, rgb(156 45 91 / 11%) 0%, rgb(48 180 228 / 2%) 50%), linear-gradient(244deg, #373e4b 0%, #303641 50%, rgb(49 65 80) 100%)),
-    var(--c-yellow-light),
-    var(--r-t-box-shadow),
-    var(--r-t-col-width-min),
-    var(--r-t-col-width-max));
+.extension {
+  @include responsive-table((radial-gradient(circle at 30% 30%, rgb(156 45 91 / 11%) 0%, rgb(48 180 228 / 2%) 50%), linear-gradient(244deg, #373e4b 0%, #303641 50%, rgb(49 65 80) 100%)), var(--c-yellow-light), var(--r-t-box-shadow), var(--r-t-col-width-min), var(--r-t-col-width-max));
 
   &-responsive-table {
     z-index: 1;
-    padding: 20px 11px;
+    padding: 5px;
 
     &_settings {
       margin: 11px 0px;
@@ -191,20 +420,12 @@ body {
     }
   }
 
-  @include progress-line-ui($progress-height: 5px,
-    $void-background-color: var(--c-shadow-dark),
-    $full-background-color: var(--c-yellow-light),
-    $void-background-image-start: var(--c-green-light),
-    $void-background-image-end: var(--c-shadow-light),
-    $full-background-image-start: var(--c-yellow),
-    $full-background-image-end: var(--c-yellow-dark),
-    $progress-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1));
+  @include progress-line-ui($progress-height: 5px, $void-background-color: var(--c-shadow-dark), $full-background-color: var(--c-yellow-light), $void-background-image-start: var(--c-green-light), $void-background-image-end: var(--c-shadow-light), $full-background-image-start: var(--c-yellow), $full-background-image-end: var(--c-yellow-dark), $progress-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1));
 
   &-progress {
     position: fixed;
     z-index: 3;
     width: 100%;
-    margin-top: 75px;
   }
 }
 
@@ -217,16 +438,7 @@ body {
     0px 0px 0px 1px rgba(255, 255, 255, 0.09);
 }
 
-.nav-mobile .menu-container .menu-sidebar {
-  width: 40%;
-}
-
-.content-nav-is-open {
-  width: calc(60% - 10px);
-}
-
-@media (max-width:60em) {
-
+@media (max-width: 60em) {
   .content,
   .content-nav-is-open {
     width: 100%;
@@ -265,7 +477,7 @@ body {
   }
 
   &__shadow-position {
-    margin: 0px 3px;
+    margin: 4px 4px;
     border-radius: 5px;
   }
 
@@ -333,9 +545,6 @@ body {
 //   }
 // }
 
-
-
-
 .extension-responsive-table #user-panel {
   display: none;
 }
@@ -384,7 +593,6 @@ body {
   background-color: var(--c-grey);
 }
 
-
 .settings-input-number {
   width: 60px;
   color: #3f3f3f;
@@ -404,7 +612,6 @@ body {
   &-input {
     width: 100%;
     height: 25px;
-    margin: 10px;
     font-size: 14px;
     border: none;
     text-align: center;
@@ -430,7 +637,6 @@ body {
 
 .user-stats {
   width: calc(100% / 3);
-  margin: 0 0 20px 0px;
   font-size: 13px;
   font-weight: 600;
   text-align: center;
@@ -466,10 +672,14 @@ body {
   -moz-box-shadow: 1px 1px 3px 0px rgb(2, 4, 4);
 }
 
-.select-color {
+.select-color,
+.select-img {
   width: 36px;
   height: 36px;
   padding: 0;
+}
+
+.select-color {
   background: rgba(66, 66, 66, 0.3098039216);
   border: 0;
   outline: 3px solid rgba(66, 66, 66, 0.3098039216);
@@ -508,11 +718,37 @@ body {
   width: calc(100% - 272px);
   color: #3f3f3f;
   height: 36px;
-  margin: 18px 10px;
+  margin: 12px 4px;
 }
 
 .account-rows {
   margin-top: 10px;
   border-radius: 10px;
   overflow: hidden;
+}
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.select-clan-tag {
+  padding: 20px 11px;
+  display: flex;
+  align-items: center;
+}
+
+.settings-name {
+  margin: 0px;
+  width: 70%;
+  display: flex;
+}
+
+.hidden {
+  width: 0px;
+  height: 0px;
+  padding: 0px;
+  margin: 0px;
 }

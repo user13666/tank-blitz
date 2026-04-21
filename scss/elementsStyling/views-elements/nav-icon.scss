@@ -1,0 +1,30 @@
+@use "sass:map";
+@mixin nav-icon($options: ()) {
+  // Конфигурация по умолчанию через map.merge
+  $conf: map.merge(
+    (
+      "bg": var(--c-shadow-dark),
+      "shadow": 0 1px 1px var(--c-shadow-light),
+      "accent": var(--c-yellow),
+      "border": 0.5px solid var(--c-shadow-light),
+      "color": var(--c-yellow),
+      "t-shadow": 0px 0.3px 1px var(--c-green-dark)
+    ),
+    $options
+  );
+
+  &-nav-icon {
+    display: inline-block;
+    position: relative;
+    caret-color: transparent;
+
+    &_min {
+      padding: 12px;
+      background-size: 25px;
+    }
+
+    &_menu {
+      margin: 0 6px;
+    }
+  }
+}

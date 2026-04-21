@@ -166,3 +166,8 @@ clanFlowQueue.push({ action: 'leave', userId: 1, clanId: 10 }, () => {
 «Существительное (объект) + Описание (свойство)».
 1. text_value (Значение типа «текст»)
 Используется чаще всего. Здесь value — это основная сущность, а text — её уточнение.
+
+extension-section
+extension-feature 
+-gradient-box
+-select-color 

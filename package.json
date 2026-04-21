@@ -4,7 +4,16 @@
   "description": "tank blitz expansion",
   "main": "index.js",
   "prettier": {
-    "printWidth": 120,
+    "printWidth": 150,
+     "overrides": [
+      {
+      "files": "js/modules/changeDom.js",
+      "options": {
+        "printWidth": 500
+        }
+      }
+    ],
+    "bracketSameLine": true,
     "tabWidth": 2,
     "singleQuote": true,
     "semi": true,

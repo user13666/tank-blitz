@@ -1,28 +1,54 @@
 @use "sass:color";
+@use "sass:list"; // 1. Добавляем импорт
+@use "sass:map";
 
-@mixin button-shadow-inset($menu-button-shadow-inset, $c-bar-dark) {
+@mixin button-shadow-inset($menu-inset, $c-bar-dark) {
   &::before {
-    content: '';
+    content: "";
     inset: 0;
     position: absolute;
     transition: 0.5s cubic-bezier(0.81, 1.21, 0.45, 0.8);
     z-index: -1;
-    -webkit-border-radius: 5px;
     border-radius: 5px;
   }
 
   &:hover::before {
-    -webkit-box-shadow: $menu-button-shadow-inset;
-    box-shadow: $menu-button-shadow-inset;
+    box-shadow: $menu-inset;
     background: $c-bar-dark;
   }
 }
 
 @mixin page-ui($nav-bar-width: 250px, $c-heder, $c-bar-dark, $c-bar, $c-bar-light, $c-color, $c-hover, $n-box-shadow) {
-  $menu-button-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.58),
-    0px 0px 0px 1px rgb(255 255 255 / 9%);
-  $menu-button-shadow-inset: inset 2px 2px 4px 0px rgba(0, 0, 0, 0.58),
-    0px 0px 0px 1px rgb(255 255 255 / 9%);
+  // @mixin nav-icon($options: ())
+  //  $conf: map.merge(
+  //   (
+  //     "bg": #333,
+  //     "color": gold,
+  //     "size": 25px
+  //   ),
+  //   $options
+  // );
+  // prettier-ignore
+  // $conf: map.merge(
+  //   (
+  //     "c-text": $c-color,
+  //     "text-min": 13px,
+  //     "text-max": 15px,
+  //     "sidebar-size": 420px,
+  //     // prettier-ignore
+  //     "menu-shadow": (2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0px 0px 0px 1px rgb(255 255 255 / 9%)),
+  //     "menu-inset": (inset 2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0px 0px 0px 1px rgb(255 255 255 / 9%)),
+  //     "max-width": 60em,
+  //     "open-shadow": rgba(0, 0, 0, 0.5),
+
+  //   ),
+  //   $options
+  // );
+
+  // prettier-ignore
+  $menu-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0px 0px 0px 1px rgb(255 255 255 / 9%);
+  // prettier-ignore
+  $menu-inset: inset 2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0px 0px 0px 1px rgb(255 255 255 / 9%);
 
   ul,
   li {
@@ -30,6 +56,7 @@
     margin: 0px;
     padding: 0px;
     overflow: auto;
+    color: #fff;
   }
 
   a {
@@ -55,180 +82,72 @@
     width: 100%;
     position: relative;
     float: right;
-  }
 
-  .content-nav-is-open {
-    width: calc(60% - 10px);
-  }
-
-  @media (max-width:60em) {
-    .content {
-      position: absolute;
+    &.content-nav-is-open {
+      width: calc(100% - 420px);
     }
 
-    .content,
-    .content-nav-is-open {
+    @media (max-width: 60em) {
+      position: absolute;
       width: 100%;
+
+      &.content-nav-is-open {
+        width: 100%;
+      }
     }
   }
 
   /*-------*/
-
-  .nav-block {
-    position: unset;
-    display: block;
-    height: 45px;
-
-    &__icon {
-      width: 21px;
-      height: 23px;
-    }
-  }
-
-  .nav-mobile {
-    background: $c-heder;
-    color: #fff;
-    padding: 0;
-    margin: 0;
-    cursor: auto;
-    font-size: 13px;
-    list-style-type: none;
-    box-shadow: $n-box-shadow;
-    width: 100%;
-    position: fixed;
-    display: inline-block;
-    z-index: 3;
-
-    &:after {
-      content: '';
-      display: table;
-      clear: both;
-    }
-
-    .filter-nav-btn {
-      height: 21px;
-      width: 21px;
-      top: 7px;
-      left: 7px;
-      position: absolute;
-
-      &-open {
-        display: none;
-        padding: 15px;
-      }
-
-      &-close {
-        display: block;
-      }
-
-      @media (max-width:60em) {
-        &-close {
-          display: none;
-          padding: 15px;
-        }
-
-        &-open {
-          display: block;
-        }
-      }
-    }
-
-    .menu-button {
+  .menu {
+    &-button {
       position: absolute;
       top: 13px;
       left: 9px;
       width: 36px;
       height: 36px;
       margin: 0;
-      -webkit-border-radius: 5px;
       border-radius: 5px;
-      -webkit-box-shadow: $menu-button-shadow;
-      box-shadow: $menu-button-shadow;
+      box-shadow: $menu-shadow;
       cursor: pointer;
       display: block;
+      z-index: 3;
+      position: fixed;
 
       &:after {
         opacity: 0;
-        top: 57px;
-        content: '';
+        top: 80px;
+        content: "";
         width: 100vw;
         display: block;
         position: fixed;
         height: 100vh;
         background: rgba(0, 0, 0, 0.5);
-        content: '';
         pointer-events: none;
         transition: opacity 0.2s cubic-bezier(0, 0, 0.3, 1);
         transition-delay: 0.1s;
       }
 
-      @include button-shadow-inset($menu-button-shadow-inset, $c-bar-dark);
+      @include button-shadow-inset($menu-inset, $c-bar-dark);
     }
 
-    #menu-toggle {
-      display: none;
-
-      &.active~.menu-button,
-      &:checked~.menu-button {
-        .filter-nav-btn-close {
-          display: none;
-        }
-
-        .filter-nav-btn-open {
-          display: block;
-        }
-
-        @media (max-width:60em) {
-          .filter-nav-btn-close {
-            display: block;
-          }
-
-          .filter-nav-btn-open {
-            display: none;
-          }
-
-          &:after {
-            opacity: 1;
-            pointer-events: auto;
-            transition: opacity 0.3s cubic-bezier(0, 0, 0.3, 1);
-          }
-        }
-      }
-
-      &.active~.menu-sidebar,
-      &:checked~.menu-sidebar {
-        width: 100%;
-        transform: translateX(calc(-100% - 9999999em));
-        transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
-        overflow: auto;
-      }
-
-      @media (max-width:60em) {
-
-        &.active~.menu-sidebar,
-        &:checked~.menu-sidebar {
-          width: 100%;
-          transform: translateX(0px) !important;
-          transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
-          overflow: auto;
-        }
-      }
-    }
-
-    @media (max-width:60em) {
-      .menu-sidebar {
-        transform: translateX(calc(-100% - 9999999em)) !important;
-      }
-    }
-
-    .menu-header {
+    &-header {
       display: flex;
-      height: 76px;
+      height: 71px;
 
       &-block {
-        margin: 0 auto;
+        position: fixed;
+        background: var(--c-green-dark);
+        height: 72px;
+        z-index: 3;
+        width: 100%;
         display: flex;
         align-items: center;
+        justify-content: center;
+
+        @media (max-width: 60em) {
+          margin-right: 3%;
+          justify-content: flex-end;
+        }
 
         &-link {
           height: 43px;
@@ -236,152 +155,192 @@
           width: 43px;
           list-style-type: none;
           background-size: 44px;
-          color: #000;
           position: relative;
           text-decoration: none;
-          -webkit-box-shadow: $menu-button-shadow;
-          box-shadow: $menu-button-shadow;
-          -webkit-border-radius: 5px;
+          box-shadow: $menu-shadow;
           border-radius: 5px;
           transition: 1s;
-          @include button-shadow-inset($menu-button-shadow-inset, $c-bar-dark);
+          @include button-shadow-inset($menu-inset, $c-bar-dark);
+        }
+      }
+    }
+
+    &-sidebar {
+      box-shadow: $n-box-shadow;
+      display: block;
+      width: 400px;
+      top: 136px;
+      left: 8px;
+      border-radius: 5px;
+      bottom: 8px;
+      background: $c-bar-light;
+      color: $c-color;
+      position: fixed;
+      transform: translateX(0px);
+      transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
+      z-index: 2;
+      list-style-type: none;
+      padding: 0;
+      @media (max-width: 60em) {
+        width: 100%;
+      }
+    }
+  }
+
+  .filter-nav-btn {
+    height: 21px;
+    width: 21px;
+    top: 7px;
+    left: 7px;
+    position: absolute;
+
+    &-open {
+      display: none;
+      padding: 15px;
+      @media (max-width: 60em) {
+        display: block;
+      }
+    }
+
+    &-close {
+      display: block;
+      @media (max-width: 60em) {
+        display: none;
+        padding: 15px;
+      }
+    }
+  }
+
+  #menu-toggle {
+    display: none;
+    // Когда чекбокс активен или нажат
+    &.active,
+    &:checked {
+      // 1. Управляем иконками в label, который идет сразу после чекбокса
+      & ~ .menu-button {
+        .filter-nav-btn-close {
+          display: none;
+        }
+        .filter-nav-btn-open {
+          display: block;
         }
 
-        @media (max-width:60em) {
-          &-link {
+        @media (max-width: 60em) {
+          .filter-nav-btn-close {
+            display: block;
+          }
+          .filter-nav-btn-open {
             display: none;
           }
         }
       }
 
-      &-bar {
-        width: 20px;
-        height: 20px;
-        background-color: $c-hover;
-        display: inline;
-        padding-right: 5px;
-        margin-right: 9px;
-      }
-
-      &-text {
-        position: relative;
-        left: 60px;
-        margin-top: 8px;
-        font-size: 16px;
-        font-weight: 600;
-        width: 173px;
-        /* word-spacing: 9999999px; */
-        color: $c-hover;
-      }
-
-      &-my-profile {
-        width: auto;
-        top: 7px;
-        position: absolute;
-        right: 20px;
-      }
-    }
-
-    .menu-container {
-      top: 12px;
-      width: 65px;
-      float: left;
-
-      .menu-sidebar {
-        box-shadow: $n-box-shadow;
-        display: block;
-        width: 40%;
-        top: 81px;
-        left: 8px;
-        border-radius: 5px;
-        bottom: 8px;
-        background: $c-bar-light;
-        color: $c-color;
-        position: fixed;
-        transform: translateX(0px);
+      // 2. Управляем появлением оверлея (если он есть в разметке или через псевдоэлемент)
+      // Внимание: :after сработает только если вы добавите его к кнопке или меню
+      & ~ .sidebar,
+      & ~ .menu-sidebar {
+        width: 100%;
+        transform: translateX(-101vw);
         transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
-        z-index: 2;
-        list-style-type: none;
-        padding: 0;
-        /* max-width: 400px; */
+        overflow: scroll;
       }
     }
   }
 
-  /**
- * Styling top level items
- */
-  .nav a,
-  .nav label {
-    margin: 10px;
-    -webkit-box-shadow: $menu-button-shadow;
-    box-shadow: $menu-button-shadow;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 0;
-    color: #fff;
-    background-color: color.adjust($c-bar-light, $lightness: -10%);
-    transition: all 0.25s ease-in;
+  .sidebar {
+    width: 100%;
+    position: fixed;
+    display: inline-block;
+    z-index: 3;
 
-    &:focus,
-    &:hover {
-      box-shadow: $menu-button-shadow-inset;
-      color: rgba(255, 255, 255, 0.5);
-      background: color.adjust($c-bar-light, $lightness: -7%);
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    &-block {
+      background: var(--c-green-light);
+      padding: 5px 5px;
+      margin-top: 5px;
+      width: 400px;
+      @media (max-width: 60em) {
+        width: 100%;
+      }
     }
   }
 
-  .nav label {
-    cursor: pointer;
-  }
+  .nav {
+    &-block {
+      position: unset;
+      display: block;
+      height: 45px;
+    }
 
-  /**
- * Styling first level lists items
- */
-  .group-list a,
-  .group-list label {
-    background: color.adjust($c-bar-light, $lightness: -7%);
-    -webkit-box-shadow: $menu-button-shadow;
-    box-shadow: $menu-button-shadow;
+    &-icon {
+      display: inline-block;
+      position: relative;
+      caret-color: transparent;
 
-    &:focus,
-    &:hover {
-      box-shadow: $menu-button-shadow-inset;
-      background: color.adjust($c-bar-light, $lightness: -14%);
+      &_min {
+        padding: 12px;
+        background-size: 25px;
+      }
+
+      &_menu {
+        margin: 0 6px;
+      }
     }
   }
 
-  /**
- * Styling second level list items
- */
-  .sub-group-list a,
-  .sub-group-list label {
-    background: color.adjust($c-bar-light, $lightness: -14%);
-    -webkit-box-shadow: $menu-button-shadow;
-    box-shadow: $menu-button-shadow;
+  /** */
 
-    &:focus,
-    &:hover {
-      box-shadow: $menu-button-shadow-inset;
-      background: color.adjust($c-bar-light, $lightness: -21%);
+  // 1. Общие стили для всех интерактивных элементов навигации
+  .nav,
+  .group-list,
+  .sub-group-list,
+  .sub-sub-group-list {
+    a,
+    label {
+      margin: 9px;
+      padding: 0.5rem 0.2em;
+      display: flex;
+      align-items: center;
+      border-radius: 5px;
+      color: #fff;
+      box-shadow: $menu-shadow;
+      transition: all 0.25s ease-in;
+      cursor: pointer; // Сразу для всех, a по умолчанию такой
+
+      &:focus,
+      &:hover {
+        box-shadow: $menu-inset;
+      }
     }
   }
 
-  /**
- * Styling third level list items
- */
-  .sub-sub-group-list a,
-  .sub-sub-group-list label {
-    background: color.adjust($c-bar-light, $lightness: -21%);
-    -webkit-box-shadow: $menu-button-shadow;
-    box-shadow: $menu-button-shadow;
+  // 2. Уровни вложенности: (селектор, базовый_цвет, яркость, яркость_hover)
+  // prettier-ignore
+  $nav-levels: (
+  ".nav":            ($c-bar-light, -10%, -7%),
+  ".group-list":     ($c-bar-light, -7%, -14%),
+  ".sub-group-list": ($c-bar-light, -14%, -21%),
+  ".sub-sub-group-list": ($c-bar-dark, -21%, -32%) // Здесь dark как в оригинале
+);
 
-    &:focus,
-    &:hover {
-      box-shadow: $menu-button-shadow-inset;
-      background: color.adjust($c-bar-dark, $lightness: -32%)
+  @each $selector, $params in $nav-levels {
+    $base-color: list.nth($params, 1); // 2. Используем list.nth
+
+    #{$selector} {
+      a,
+      label {
+        background-color: color.adjust($base-color, $lightness: list.nth($params, 2));
+
+        &:focus,
+        &:hover {
+          background-color: color.adjust($base-color, $lightness: list.nth($params, 3));
+        }
+      }
     }
   }
 
@@ -397,20 +356,23 @@
     transition: max-height 0.5s ease-in-out;
   }
 
-  .nav__list input[type='checkbox']:checked+label+ul {
-    /* reset the height when checkbox is checked */
-    max-height: 1000px;
-  }
+  .nav__list {
+    input[type="checkbox"] {
+      display: none;
 
-  /**
- * Rotating chevron icon
- */
-  label>span {
-    float: right;
-    transition: transform 0.65s ease;
-  }
+      &:checked {
+        & + label + ul {
+          max-height: 1000px;
+        }
+        & + label > span {
+          transform: rotate(90deg);
+        }
+      }
+    }
 
-  .nav__list input[type='checkbox']:checked+label>span {
-    transform: rotate(90deg);
+    label > span {
+      float: right;
+      transition: transform 0.65s ease;
+    }
   }
 }

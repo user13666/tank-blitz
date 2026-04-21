@@ -1,57 +1,65 @@
-@use "sass:color";
+@use "sass:map";
 
-@mixin radio-ui($color: #efefef, $activeColor: #2d86a7, $text: #292929, $activeText: #efefef) {
+@mixin radio-ui($config) {
+  // Вытягиваем значения один раз
+  $bg: map.get($config, "bg");
+  $active-bg: map.get($config, "bg-active");
+  $text: map.get($config, "text");
+  $active-text: map.get($config, "text-active");
+
   .button-wrap {
     display: flex;
-    justify-content: center;
-    position: relative;
-    text-align: center;
-    top: 50%;
+    width: 100%;
+    gap: 4px; // Расстояние между кнопками
+    padding: 5px;
   }
 
   .button-label {
+    flex: 1; // Все кнопки будут строго одинаковой ширины
     display: flex;
     justify-content: center;
-    padding: 0.4em;
-    margin: 0.05em;
-    width: calc(100% / 3);
+    align-items: center;
+    padding: 0.6em 0.2em;
     cursor: pointer;
-    color: $text;
-    border-radius: 0.25em;
-    background: $color;
-    box-shadow:
-      0 3px 10px rgba(0, 0, 0, 0.2),
-      inset 0 -3px 0 rgba(0, 0, 0, 0.22);
-    transition: 0.3s;
+    font-size: 13px;
+    border-radius: map.get($config, "radius");
     user-select: none;
+    transition: all 0.2s ease;
+
+    // Базовое состояние
+    background: $bg;
+    color: $text;
+    box-shadow:
+      0 3px 6px rgba(0, 0, 0, 0.16),
+      inset 0 -3px 0 rgba(0, 0, 0, 0.1);
 
     &:hover {
-      background: color.adjust($color, $lightness: -10%);
-      color: color.adjust($text, $lightness: -10%);
+      filter: brightness(0.95);
       box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.2),
-        inset 0 -3px 0 rgba(0, 0, 0, 0.32);
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        inset 0 -3px 0 rgba(0, 0, 0, 0.15);
     }
 
     &:active {
       transform: translateY(2px);
       box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.2),
-        inset 0px -1px 0 rgba(0, 0, 0, 0.22);
+        0 1px 3px rgba(0, 0, 0, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     }
   }
 
-  .radio-label:checked+.button-label {
-    background: $activeColor;
-    color: $activeText;
+  // Скрываем радио и красим активный label
+  .radio-label {
+    display: none; // Скрываем инпуты с классом .hidden и .radio-label
 
-    &:hover {
-      background: color.adjust($activeColor, $lightness: -5%);
-      color: color.adjust($activeText, $lightness: -5%);
+    &:checked + .button-label {
+      background: $active-bg;
+      color: $active-text;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); // Эффект нажатой кнопки
+
+      &:hover {
+        filter: brightness(1.1);
+      }
     }
-  }
-
-  .hidden {
-    display: none;
   }
 }

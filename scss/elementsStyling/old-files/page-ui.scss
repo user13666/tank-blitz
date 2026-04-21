@@ -1,0 +1,325 @@
+@use "sass:color";
+@use "sass:list"; // 1. Добавляем импорт
+
+@mixin size($w, $h: $w) {
+  width: $w;
+  height: $h;
+}
+
+@mixin button-shadow-inset($menu-inset, $c-bar-dark) {
+  &::before {
+    content: "";
+    inset: 0;
+    position: absolute;
+    transition: 0.5s cubic-bezier(0.81, 1.21, 0.45, 0.8);
+    z-index: -1;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+  }
+
+  &:hover::before {
+    -webkit-box-shadow: $menu-inset;
+    box-shadow: $menu-inset;
+    background: $c-bar-dark;
+  }
+}
+
+@mixin page-ui($nav-bar-width: 250px, $c-heder, $c-bar-dark, $c-bar, $c-bar-light, $c-color, $c-hover, $n-box-shadow) {
+  // prettier-ignore
+  $menu-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0 0 0 1px rgb(255 255 255 / 9%);
+  // prettier-ignore
+  $menu-inset: inset 2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0 0 0 1px rgb(255 255 255 / 9%);
+
+  // 2. Глобальные сбросы (лучше вынести из миксина, но оставляем по контексту)
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  ul,
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    // overflow: auto; // Убери это, если не хочешь внезапных полос прокрутки в меню
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  // 3. Основной контент
+  .content {
+    margin-top: 16px;
+    width: 100%;
+    position: relative;
+    transition: width 0.3s ease; // Добавляем плавность при открытии меню
+
+    // Вместо float: right используем современную логику
+    margin-left: auto;
+
+    &-nav-is-open {
+      width: calc(100% - 420px);
+    }
+
+    @media (max-width: 60em) {
+      position: absolute;
+      width: 100% !important;
+      margin: 16px 0 0 0;
+    }
+  }
+
+  // 4. Вспомогательные блоки
+  .nav-block {
+    display: block;
+    height: 45px;
+
+    &__icon {
+      width: 21px;
+      height: 23px;
+      object-fit: contain; // Чтобы иконки не деформировались
+    }
+  }
+
+  .sidebar {
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+    height: 45px; // Фиксированная высота лучше inline-block
+    background: $c-heder;
+    color: #fff;
+    font-size: 13px;
+    box-shadow: $n-box-shadow;
+
+    // Общий сброс для списков внутри
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    // 1. Кнопки фильтра (иконки внутри menu-button)
+    .filter-nav-btn {
+      position: absolute;
+      top: 7px;
+      left: 7px;
+      @include size(21px); // Опциональный миксин для width/height
+
+      &-open {
+        display: none;
+        padding: 15px;
+      }
+      &-close {
+        display: block;
+      }
+
+      @media (max-width: 60em) {
+        &-open {
+          display: block;
+        }
+        &-close {
+          display: none;
+          padding: 15px;
+        }
+      }
+    }
+
+    // 2. Главная кнопка меню
+    .menu-button {
+      position: absolute;
+      top: 13px;
+      left: 9px;
+      @include size(36px);
+      border-radius: 5px;
+      box-shadow: $menu-shadow;
+      cursor: pointer;
+      @include button-shadow-inset($menu-inset, $c-bar-dark);
+
+      // Затемнение фона (оверлей)
+      &::after {
+        content: "";
+        position: fixed;
+        inset: 80px 0 0 0; // Компактная запись top/right/bottom/left
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+    }
+
+    // 3. Логика переключения (Checkbox Hack)
+    #menu-toggle {
+      display: none;
+
+      &:checked {
+        // Состояние иконок при клике
+        ~ .menu-button {
+          .filter-nav-btn-close {
+            display: none;
+          }
+          .filter-nav-btn-open {
+            display: block;
+          }
+
+          @media (max-width: 60em) {
+            .filter-nav-btn-close {
+              display: block;
+            }
+            .filter-nav-btn-open {
+              display: none;
+            }
+            &::after {
+              opacity: 1;
+              pointer-events: auto;
+            }
+          }
+        }
+
+        // Анимация сайдбара
+        ~ .menu-sidebar {
+          transform: translateX(-200%); // Скрываем в сторону вместо гигантских calc
+          @media (max-width: 60em) {
+            transform: translateX(0);
+          }
+        }
+      }
+    }
+
+    // 4. Шапка меню (профиль и линки)
+    .menu-header {
+      display: flex;
+      height: 76px;
+      align-items: center;
+
+      &-block {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+
+        @media (max-width: 60em) {
+          justify-content: flex-end;
+          padding-right: 3%;
+        }
+
+        &-link {
+          @include size(43px);
+          margin: 4px;
+          border-radius: 5px;
+          box-shadow: $menu-shadow;
+          transition: 0.3s;
+          @include button-shadow-inset($menu-inset, $c-bar-dark);
+        }
+      }
+
+      &-text {
+        margin-left: 60px;
+        font-size: 16px;
+        font-weight: 600;
+        color: $c-hover;
+      }
+    }
+
+    // 5. Контейнер сайдбара
+
+    .menu-sidebar {
+      position: fixed;
+      top: 81px;
+      left: 8px;
+      bottom: 8px;
+      width: 420px;
+      background: $c-bar-light;
+      border-radius: 5px;
+      box-shadow: $n-box-shadow;
+      transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
+      z-index: 2;
+
+      @media (max-width: 60em) {
+        transform: translateX(-150%); // Скрыто по дефолту на мобилках
+      }
+    }
+  }
+
+  // 1. Общие стили для всех интерактивных элементов навигации
+  .nav,
+  .group-list,
+  .sub-group-list,
+  .sub-sub-group-list {
+    a,
+    label {
+      margin: 9px;
+      padding: 0.5rem 0.2em;
+      display: flex;
+      align-items: center;
+      border-radius: 5px;
+      color: #fff;
+      box-shadow: $menu-shadow;
+      transition: all 0.25s ease-in;
+      cursor: pointer; // Сразу для всех, a по умолчанию такой
+
+      &:focus,
+      &:hover {
+        box-shadow: $menu-inset;
+      }
+    }
+  }
+
+  // 2. Уровни вложенности: (селектор, базовый_цвет, яркость, яркость_hover)
+  // prettier-ignore
+  $nav-levels: (
+  ".nav":            ($c-bar-light, -10%, -7%),
+  ".group-list":     ($c-bar-light, -7%, -14%),
+  ".sub-group-list": ($c-bar-light, -14%, -21%),
+  ".sub-sub-group-list": ($c-bar-dark, -21%, -32%) // Здесь dark как в оригинале
+);
+
+  @each $selector, $params in $nav-levels {
+    $base-color: list.nth($params, 1); // 2. Используем list.nth
+
+    #{$selector} {
+      a,
+      label {
+        background-color: color.adjust($base-color, $lightness: list.nth($params, 2));
+
+        &:focus,
+        &:hover {
+          background-color: color.adjust($base-color, $lightness: list.nth($params, 3));
+        }
+      }
+    }
+  }
+
+  // 3. Логика списков и иконок
+  .group-list,
+  .sub-group-list,
+  .sub-sub-group-list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+  }
+
+  .nav__list {
+    input[type="checkbox"] {
+      display: none;
+
+      &:checked {
+        & + label + ul {
+          max-height: 1000px;
+        }
+        & + label > span {
+          transform: rotate(90deg);
+        }
+      }
+    }
+
+    label > span {
+      float: right;
+      transition: transform 0.65s ease;
+    }
+  }
+}

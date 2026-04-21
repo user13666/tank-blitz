@@ -184,9 +184,9 @@ function handlerPicker(settings) {
   if (icon) iconSelect.setSelectedByFileName(icon);
 
   const inputIcon = document.getElementById(inputId);
-  if (inputIcon) inputIcon.value = iconSelect.selectedValue;
+  if (inputIcon) inputIcon.value = `${iconPath}${iconSelect.selectedValue}`;
 
   iconSelect.container.addEventListener('changed', () => {
-    if (inputIcon) inputIcon.value = iconSelect.selectedValue;
+    if (inputIcon) inputIcon.value = `${iconPath}${iconSelect.selectedValue}`;
   });
 }

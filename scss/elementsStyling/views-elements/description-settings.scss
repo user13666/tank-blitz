@@ -1,11 +1,37 @@
-@mixin description-settings() {
-	/* End basic CSS override */
+@use "sass:map"; // Обязательно в самом начале файла
+$desc-theme: (
+	"bg": var(--c-blue-700),
+	"bg-inner": var(--c-blue-800),
+	"border": var(--c-blue-300),
+	"accent": var(--c-cyan-400),
+	"shadow": rgba(#000, 0.15),
+	"grad-base": linear-gradient(135deg, rgba(#de4a4a, 0.15), rgba(#30b4e4, 0.1) 20%, var(--c-blue-700) 40%),
+	"grad-line": linear-gradient(179deg, rgb(13 13 33 / 69%), rgba(48, 180, 228, 0.1) 20%, var(--c-blue-700) 40%)
+);
 
-	&-section {
+// Хелпер для центрирования (позиционирование)
+@mixin abs-center($top: 50%, $left: 50%) {
+	position: absolute;
+	top: $top;
+	left: $left;
+	transform: translate(-50%, -100%);
+}
+
+@keyframes desc-scale {
+	from {
+		transform: translate(-50%, -100%) scale(0);
+	}
+	to {
+		transform: translate(-50%, -100%) scale(1);
+	}
+}
+
+@mixin description-settings() {
+	&-sect {
 		margin: 50px 2px 4px 5px;
 	}
 
-	&-feature {
+	&-feat {
 		position: relative;
 		& + & {
 			margin-top: 16px;
@@ -13,73 +39,85 @@
 		summary {
 			display: inline-flex;
 			align-items: center;
-			list-style: none; // Remove arrow
+			list-style: none;
 			&::-webkit-details-marker {
-				display: none; // Remove arrow
+				display: none;
 			}
-		}
-
-		&[open] summary:after {
-			position: fixed;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			z-index: 50;
-			display: block;
-			content: "";
 		}
 
 		&[open] {
+			summary:after {
+				content: "";
+				position: fixed;
+				inset: 0;
+				z-index: 50;
+			}
 			div {
-				animation: scale 0.15s ease;
+				animation: desc-scale 0.15s ease;
 			}
 		}
+
 		.name {
 			font-size: 20px;
 			font-weight: 900;
 		}
 
-		.check-mark {
+		.icon {
 			display: flex;
-			width: 42px;
-			height: 46px;
-			margin: 10px;
 			align-items: center;
 			justify-content: center;
+			&.check {
+				width: 42px;
+				height: 46px;
+				margin: 10px;
+			}
+			&.ask {
+				width: 25px;
+				height: 25px;
+				margin-left: 6px;
+				cursor: pointer;
+			}
 		}
 
-		.question-icon {
-			display: flex;
-			width: 25px;
-			height: 25px;
-			align-items: center;
-			margin-left: 6px;
-			cursor: pointer;
-		}
-
-		.answer {
-			position: absolute;
-			top: 15px;
-			left: 50%;
+		.ans {
+			@include abs-center(15px, 50%);
 			z-index: 100;
 			width: 80%;
 			padding: 12px;
-			border: 1px solid var(--c-blue-300);
 			border-radius: 6px;
-			background-color: var(--c-blue-800);
-			transform: translatey(-100%) translatex(-50%);
+			background: map.get($desc-theme, "bg-inner");
+			border: 1px solid map.get($desc-theme, "border");
+			box-shadow: 0 15px 30px map.get($desc-theme, "shadow");
 			transform-origin: bottom center;
-			box-shadow: 0 15px 30px 0 rgba(#000, 0.1);
 		}
 	}
 
-	@keyframes scale {
-		0% {
-			transform: translatey(-100%) translatex(-50%) scale(0);
+	&-box {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		padding: 2px;
+		border-radius: 16px;
+		background: map.get($desc-theme, "grad-base");
+		box-shadow: 0 15px 45px map.get($desc-theme, "shadow");
+
+		&:after {
+			content: "";
+			position: absolute;
+			inset: -3px;
+			z-index: -1;
+			border-radius: 16px;
+			background: map.get($desc-theme, "grad-line");
 		}
-		100% {
-			transform: translatey(-100%) translatex(-50%) scale(1);
-		}
+	}
+
+	&-row {
+		margin: 4px 2px;
+		border-radius: 5px;
+	}
+
+	&-wrap {
+		overflow: hidden;
+		margin: 0 5px;
 	}
 }

@@ -1,5 +1,6 @@
 @mixin responsive-table($c-background, $c-yellow-light, $r-t-box-shadow, $r-t-col-width-min, $r-t-col-width-max) {
-  $r-t-block-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.58),
+  $r-t-block-shadow:
+    2px 2px 4px 0px rgba(0, 0, 0, 0.58),
     0px 0px 0px 1px rgba(255, 255, 255, 0.09);
 
   &-container {
@@ -37,7 +38,7 @@
   }
 
   &-responsive-table {
-    padding: 0;
+    padding: 0px;
 
     &-li,
     &-li-item {
@@ -46,6 +47,7 @@
       align-items: center;
       justify-content: space-between;
       container-type: inline-size;
+      padding: 10px 0px;
     }
 
     &__header {
@@ -54,6 +56,9 @@
       font-size: 14px;
       color: $c-yellow-light;
       box-shadow: $r-t-box-shadow;
+      @media (max-width: 60em) {
+        display: none !important;
+      }
 
       &_extension-menu {
         top: 150px;
@@ -121,7 +126,7 @@
     }
   }
 
-  @media all and (max-width:60em) {
+  @media all and (max-width: 60em) {
     body {
       margin: 0;
     }

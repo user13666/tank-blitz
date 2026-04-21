@@ -61,24 +61,7 @@ a {
   display: block;
   margin: 20px auto;
   padding: 2px;
-
 }
-
-.input-value {
-  float: right;
-  overflow: hidden;
-  width: 53px;
-  height: 15px;
-  background-color: rgb(62, 70, 55);
-  color: white;
-  border: none;
-  box-shadow:
-    inset 2px 2px 4px #555d49,
-    inset -2px -2px 4px #737d63;
-  background: #646d56;
-}
-
-
 
 .submit-button {
   margin-top: 4px;
@@ -109,12 +92,12 @@ a {
   transform: scale(1.13);
   box-shadow:
     inset 2px 2px 4px #2c3139,
-    inset -2px -2px 4px #4f586a;
+    inset -2px -2px 4px #272b34;
 }
 
 .swg-steam,
-.swg-discord,
-.swg-donate {
+.swg-chat24,
+.swg-youtube {
   display: inline-flex;
   align-content: center;
   width: 30px;
@@ -129,24 +112,25 @@ a {
 
 .swg-steam:hover,
 .swg-steam:focus,
-.swg-discord:hover,
-.swg-discord:focus,
-.swg-donate:hover,
-.swg-donate:focus {
-  filter: invert(75%) sepia(55%) saturate(413%) hue-rotate(10deg) brightness(86%) contrast(91%);
+.swg-chat24:hover,
+.swg-chat24:focus,
+.swg-youtube:hover,
+.swg-youtube:focus {
+  filter: brightness(0) saturate(100%) invert(77%) sepia(6%) saturate(3714%) hue-rotate(166deg) brightness(85%)
+    contrast(87%);
 }
 
 .swg-steam {
   display: flex;
-  background-image: url('../images/svg/steam-symbol.svg');
+  background-image: url("../images/svg/steam-symbol.svg");
 }
 
-.swg-discord {
+.swg-chat24 {
   display: flex;
-  background-image: url('../images/svg/discord.svg');
+  background-image: url("../images/svg/chat24.svg");
 }
 
-.swg-donate {
+.swg-youtube {
   display: flex;
-  background-image: url('../images/svg/donate-solid.svg');
+  background-image: url("../images/svg/youtube.svg");
 }

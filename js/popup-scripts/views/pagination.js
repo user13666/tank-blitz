@@ -1,5 +1,7 @@
 // Используем объект для параметров, чтобы не путаться в порядке аргументов
-async function displayPagination(config) {
+import { html, render } from '../../modules/lit-all.min.js';
+
+export default async function displayPagination(config) {
   const { selector, displayDataFn } = config;
 
   const result = await getPaginationData(config);
@@ -29,14 +31,7 @@ async function displayPagination(config) {
   };
 }
 
-async function getPaginationData({
-  numberOfRecordsFn,
-  itemPageFn,
-  currentPage = 1,
-  startPage = 1,
-  pageSize = 100,
-  maxPages = 10,
-}) {
+async function getPaginationData({ numberOfRecordsFn, itemPageFn, currentPage = 1, startPage = 1, pageSize = 100, maxPages = 10 }) {
   const totalRecords = await numberOfRecordsFn();
   if (totalRecords === 0) return null;
 
@@ -50,22 +45,16 @@ function renderPaginationNav({ totalPages, currentPage, pages }, selector) {
   const container = document.querySelector(selector);
   if (!container) return;
 
-  // Генерируем кнопки через map/join — это чище
-  const buttonsHtml = pages
-    .map(
-      page => `
+  const navHtml = html` <div class="extension-pagination-sidebar">
+    ${pages.map(
+      page => html`
     <a class="page-link" data-page="${page}" style="cursor: pointer;">
-      <div style="margin: 0px 12px; ${page === currentPage ? 'font-weight: bold;' : ''}">${page}</div>
+      <div class="nav-icon_menu" ${page === currentPage ? 'font-weight: bold;' : ''}">${page}</div>
     </a>
   `,
-    )
-    .join('');
+    )}
+    <span class="settings-input-number page_number"> ${currentPage} / ${totalPages}</span>
+  </div>`;
 
-  const navHtml = `
-    <div class="extension-pagination-sidebar">
-      ${buttonsHtml}
-      <span class="settings-input-number page_number"> ${currentPage} / ${totalPages}</span>
-    </div>`;
-
-  container.innerHTML = DOMPurify.sanitize(navHtml);
+  render(navHtml, container);
 }

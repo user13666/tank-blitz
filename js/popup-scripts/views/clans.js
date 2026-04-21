@@ -1,5 +1,19 @@
+/* eslint-disable import/extensions */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable func-names */
+
+import {
+  selectClan,
+  userTableRow,
+  userStatistics,
+  showUserStats,
+  pointsChart,
+  userRow,
+  renderItemBlock,
+  renderItemList,
+} from '../../modules/changeDom.js';
+
+import displayPagination from './pagination.js';
 
 // Единый объект для управления всеми БД
 const AppDB = {
@@ -50,8 +64,8 @@ chrome.storage.local.get(
     'workloadSevenDay',
   ],
   async data => {
-    const selectClanDom = document.querySelector('#selectClan');
-    selectClan(selectClanDom, data.clanList || '', (pasteOptionDom = 'beforeend'));
+    const selectClanDom = document.querySelector('#selectClanBlock');
+    selectClan(selectClanDom, data.clanList || '', 'beforeend');
     const extensionSettings = { ...data };
     extensionSettings.CountRequests = 5;
     try {
@@ -107,7 +121,7 @@ function showPicker(item, fields, prefix, showImg = false) {
     icon,
   });
   if (!showImg) return;
-  const imgUrl = chrome.runtime.getURL(`images/png/select/${icon}`);
+  const imgUrl = chrome.runtime.getURL(`${icon}`);
   const img = document.querySelector(`#img-${prefix}-input-${hasPicker.value}-${id}`);
   if (img) img.src = imgUrl;
 }
@@ -174,7 +188,7 @@ async function handleTagAction() {
     showPicker({}, fields, prefix);
   });
 
-  const withoutId = ['tag-create', 'winrate-create'];
+  const withoutId = ['tag-create', 'winrate-create', 'roles-create'];
   const crud = asyncProtectClick(async event => {
     const btn = event.target.closest('[id*="-btn"]');
     if (!btn) return;
@@ -234,11 +248,11 @@ async function handleItemTag() {
 
 async function handleTags() {
   const defaultRoles = [
-    { id: 1, name: 'звание1', limit: '1', icon: '1.png' },
-    { id: 2, name: 'звание2', limit: '2', icon: '2.png' },
-    { id: 3, name: 'звание3', limit: '3', icon: '3.png' },
-    { id: 4, name: 'звание4', limit: '4', icon: '4.png' },
-    { id: 5, name: 'звание5', limit: '5', icon: '5.png' },
+    { id: 1, name: 'звание1', limit: '1', icon: 'images/png/select/1.jpg' },
+    { id: 2, name: 'звание2', limit: '2', icon: 'images/png/select/2.jpg' },
+    { id: 3, name: 'звание3', limit: '3', icon: 'images/png/select/3.jpg' },
+    { id: 4, name: 'звание4', limit: '4', icon: 'images/png/select/4.jpg' },
+    { id: 5, name: 'звание5', limit: '5', icon: 'images/png/select/5.jpg' },
   ];
   const rolesFields = [
     { type: 'text', value: 'name' },
@@ -420,7 +434,7 @@ async function showUsers(members, extensionSettings) {
   // 2. Быстрая отрисовка без ожидания внутри цикла
   for (const memberData of membersArray) {
     const { account_id } = memberData;
-    const userData = addAdditionalInformation(memberData, extensionSettings);
+    const userData = await addAdditionalInformation(memberData, extensionSettings);
     userData.color = await getColor(memberData?.statistics.winRate);
 
     const { tags = [], stats = {} } = dbDataMap.get(account_id);
@@ -448,16 +462,14 @@ async function showUsers(members, extensionSettings) {
     currentRow.dataset.userdata = JSON.stringify({ userData });
     // Больше никакой привязки .onclick внутри цикла!
   }
-  const nameBlock = document.querySelector(
-    '#table-users p.extension-responsive-table__col.extension-responsive-table__col_width-max',
-  );
+  const nameBlock = document.querySelector('#table-users p.extension-responsive-table__col.extension-responsive-table__col_width-max');
   sortingName(nameBlock);
   addUserDate(); // отобразить элемент даты
   await savePointsUsers(usersIdArr, members, extensionSettings);
   await selectStorageUsers();
 }
 
-function addAdditionalInformation(memberData, extensionSettings) {
+async function addAdditionalInformation(memberData, extensionSettings) {
   const { role, joined_at } = memberData;
   const daysKeys = ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven'];
   // 1. Создаем чистый массив из 7 дней без дублей
@@ -465,11 +477,11 @@ function addAdditionalInformation(memberData, extensionSettings) {
   const diffInDays = getDiffDate(joined_at, 'days');
   // 2. Логика требований: если индекс больше 6, берем последний (7-й) день
   const requirement = workloadDays[Math.min(diffInDays, 6)];
-  const { userRole, userIcon } = getMemberRole(joined_at);
+  const { userRole, userIcon } = await getMemberRole(joined_at);
   const GLOBAL_ROLES = [
     { type: 'private', role: userRole, icon: userIcon, requirement },
-    { type: 'executive_officer', role: 'Офицер', icon: 'icon-moderator', requirement },
-    { type: 'commander', role: 'Глава', icon: 'icon-founder', requirement },
+    { type: 'executive_officer', role: 'Офицер', icon: 'images/png/clan/moderator.png', requirement },
+    { type: 'commander', role: 'Глава', icon: 'images/png/clan/founder.png', requirement },
   ];
   // 3. Находим роль или используем объект 'private' по умолчанию
   const roleObj = GLOBAL_ROLES.find(r => r.type === role) || GLOBAL_ROLES[0];
@@ -477,14 +489,11 @@ function addAdditionalInformation(memberData, extensionSettings) {
   return { ...memberData, ...roleObj };
 }
 
-function getMemberRole(joined_at) {
+async function getMemberRole(joined_at) {
   const diffInMonths = getDiffDate(joined_at, 'months');
   // Определяем пороги в порядке убывания
-  const ROLES = [
-    { limit: 12, name: 'Ветеран', icon: 'icon-veteran' },
-    { limit: 6, name: 'Участник', icon: 'icon-member' },
-    { limit: 0, name: 'Новичок', icon: 'icon-newcomer' },
-  ];
+  const rolesArr = await AppDB.settings.roles.toArray();
+  const ROLES = rolesArr.sort((first, second) => second.limit - first.limit);
   // Находим первую роль, под условие которой подходит diffInMonths
   const role = ROLES.find(r => diffInMonths > r.limit) || ROLES[ROLES.length - 1];
   return { userRole: role.name, userIcon: role.icon };
@@ -493,7 +502,7 @@ function getMemberRole(joined_at) {
 function getDiffDate(date, time) {
   const today = moment();
   const momentDate = moment(date * 1000);
-  diffInTime = today.diff(momentDate, time);
+  const diffInTime = today.diff(momentDate, time);
   return diffInTime;
 }
 
@@ -737,8 +746,7 @@ function editPoints(stats, requirement) {
       const oldDateStr = elOldDate.textContent;
       const statArr = [elPoint.value, elTeam.value];
 
-      if (newDateStr === oldDateStr && elPoint.defaultValue === statArr[0] && elTeam.defaultValue === statArr[1])
-        return;
+      if (newDateStr === oldDateStr && elPoint.defaultValue === statArr[0] && elTeam.defaultValue === statArr[1]) return;
 
       let { stats } = (await AppDB.users.users.get(accountId)) ?? {};
       if (!stats) return;
@@ -834,7 +842,6 @@ async function showSelectedPoints(requirement) {
 
 async function displayUsersData(usersArr) {
   removeAllDom('.user-data-row');
-  domRemove(document.querySelector('#all-users .extension-pagination-sidebar'));
   const clans = (await AppDB.clans.clansData.toArray()) ?? {};
   const clansNamesArr = clans.map(c => c.name);
   const tableBlock = document.querySelector('#all-users .extension-responsive-table');
@@ -855,7 +862,6 @@ async function displayUsersData(usersArr) {
 // Использование объекта-словаря
 function handleUserViewRequest(type) {
   removeAllDom('.user-data-row');
-  domRemove(document.querySelector('#all-users .extension-pagination-sidebar'));
   const viewMap = {
     all: showAllUsers,
     'in-clan': showUsersInClan,
@@ -879,8 +885,8 @@ async function selectStorageUsers() {
 }
 
 async function showAllUsers() {
-  numberOfRecordsFn = async () => AppDB.users.users.count();
-  itemPageFn = async (startIndex, pageSize) => AppDB.users.users.offset(startIndex).limit(pageSize).toArray();
+  const numberOfRecordsFn = async () => AppDB.users.users.count();
+  const itemPageFn = async (startIndex, pageSize) => AppDB.users.users.offset(startIndex).limit(pageSize).toArray();
   const displayDataFn = usersArr => {
     displayUsersData(usersArr);
   };
@@ -1064,7 +1070,6 @@ async function searchByTags() {
   // Логика кнопки "Загрузить" (обновление данных)
   const search = asyncProtectClick(async () => {
     removeAllDom('.user-data-row');
-    domRemove(document.querySelector('#all-users .extension-pagination-sidebar'));
     setProgress(0);
     const searchTags = tagifySearchTags.value.map(tag => tag.value);
     const usersRadioBlock = document.querySelector('#users-radio');

@@ -14,32 +14,39 @@
 
 <body>
   <input class="switchedBlock-checkboxInput" type="checkbox" id="item-type">
-  <nav class="menu-header">
-    <li class="menu-header-block">
+  <li class="menu-header">
+    <ul class="menu-header-block">
       <a href="./home.html">
-        <div class="swg-home menu-header-block-link"></div>
+        <li class="swg-home menu-header-block-link"></li>
       </a>
       <a href="./clans.html">
-        <div class="swg-timeline menu-header-block-link"></div>
+        <li class="swg-timeline menu-header-block-link"></li>
       </a>
-    </li>
-  </nav>
+    </ul>
+  </li>
   <div class="extension-progress">
     <div class="extension-bar" style="width: 0%;"></div>
   </div>
-  <input id="menu-toggle" type="checkbox">
+
   <label for="menu-toggle" class="menu-button">
     <div class="swg-menu filter-nav-btn filter-nav-btn-open"></div>
     <div class="swg-close filter-nav-btn filter-nav-btn-close"></div>
   </label>
 
-  <aside class="sidebar"> <!-- nav-mobile -->
-    <li class="sidebar-block">
-      <!-- <input id="menu-toggle" type="checkbox">
-      <label for="menu-toggle" class="menu-button">
-        <div class="swg-menu filter-nav-btn filter-nav-btn-open"></div>
-        <div class="swg-close filter-nav-btn filter-nav-btn-close"></div>
-      </label> -->
+  <ul class="sidebar">
+    <!-- <li class="menu-header">
+        <ul class="menu-header-block">
+          <a href="./home.html">
+            <li class="swg-home menu-header-block-link"></li>
+          </a>
+          <a href="./clans.html">
+            <li class="swg-timeline menu-header-block-link"></li>
+          </a>
+        </ul>
+      </li> -->
+
+    <li>
+      <input id="menu-toggle" type="checkbox">
 
 
       <input class="switchedBlock-checkboxInput" type="checkbox" id="filter-pages">
@@ -53,9 +60,8 @@
             <span class="switchedBlock-inputText">Настройки</span>
           </div>
         </label>
-
       </div>
-      <ul class="menu-sidebar nav  nav__list" id="filter-list">
+      <ul class="menu-sidebar nav nav__list" id="filter-list">
 
 
 
@@ -153,7 +159,7 @@
       <ul class="menu-sidebar nav nav__list" id="control-panel">
       </ul>
     </li>
-  </aside>
+  </ul>
 
 
 

@@ -12,12 +12,8 @@
 <body>
 
   <div class="nav-block">
-    <ul class="nav-mobile">
+    <ul class="sidebar">
       <li class="menu-header">
-        <div class="menu-header-text">
-          <div class="menu-header-bar"></div>
-          Home
-        </div>
         <ul class="menu-header-block">
           <a href="./home.html">
             <li class="swg-home menu-header-block-link"></li>
@@ -29,7 +25,7 @@
         </ul>
       </li>
 
-      <li class="menu-container">
+      <li>
         <input id="menu-toggle" type="checkbox">
         <label for="menu-toggle" class="menu-button">
           <div class="swg-menu filter-nav-btn filter-nav-btn-open"></div>
@@ -41,16 +37,14 @@
 
           <li>
             <a class="statistics">
-              <div
-                class="swg-bookmark-remove extension-nav-icon  extension-nav-icon_min statistics-nav-icon_min extension-nav-icon_menu">
+              <div class="swg-bookmark-remove nav-icon  nav-icon_min statistics-nav-icon_min nav-icon_menu">
               </div>
               <span class="statistics-name">History</span> <span class="statistics-value" id="historyCount">0</span>
             </a>
           </li>
           <li>
             <a class="statistics">
-              <div
-                class="swg-bookmark-added extension-nav-icon  extension-nav-icon_min statistics-nav-icon_min extension-nav-icon_menu">
+              <div class="swg-bookmark-added nav-icon  nav-icon_min statistics-nav-icon_min nav-icon_menu">
               </div>
               <span class="statistics-name">Purchase</span> <span class="statistics-value" id="purchaseCount">0</span>
             </a>
@@ -58,8 +52,7 @@
 
           <li>
             <a class="statistics">
-              <div
-                class="swg-problem extension-nav-icon  extension-nav-icon_min statistics-nav-icon_min extension-nav-icon_menu">
+              <div class="swg-problem nav-icon  nav-icon_min statistics-nav-icon_min nav-icon_menu">
               </div>
               <span class="statistics-name">D... Groups</span> <span class="statistics-value"
                 id="dangerousGroupsCount">0</span>
@@ -105,13 +98,14 @@
 
 
   </div>
+  <script type="module" src="./../../js/modules/lit-all.min.js"></script>
   <script src="./../../js/localize/localize.js"></script>
   <script src="./../../js/modules/tagify.js"></script>
   <script src="./../../js/popup-scripts/views/block-resizing.js"></script>
   <script src="./../../js/modules/purify.js"></script>
   <script src="./../../js/modules/externalFunctions.js"></script>
-  <script src="./../../js/modules/changeDom.js"></script>
-  <script src="./../../js/popup-scripts/views/home.js"></script>
+  <script type="module" src="./../../js/modules/changeDom.js"></script>
+  <script type="module" src="./../../js/popup-scripts/views/home.js"></script>
 </body>
 
 </html>

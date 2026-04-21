@@ -1,3 +1,6 @@
+/* eslint-disable import/extensions */
+import { insertExtensionSettingsTab, insertExtensionSetting } from '../../modules/changeDom.js';
+
 chrome.storage.local.get(
   [
     'delaysServerRequest',
