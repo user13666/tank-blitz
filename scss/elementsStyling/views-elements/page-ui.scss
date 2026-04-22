@@ -19,32 +19,6 @@
 }
 
 @mixin page-ui($nav-bar-width: 250px, $c-heder, $c-bar-dark, $c-bar, $c-bar-light, $c-color, $c-hover, $n-box-shadow) {
-  // @mixin nav-icon($options: ())
-  //  $conf: map.merge(
-  //   (
-  //     "bg": #333,
-  //     "color": gold,
-  //     "size": 25px
-  //   ),
-  //   $options
-  // );
-  // prettier-ignore
-  // $conf: map.merge(
-  //   (
-  //     "c-text": $c-color,
-  //     "text-min": 13px,
-  //     "text-max": 15px,
-  //     "sidebar-size": 420px,
-  //     // prettier-ignore
-  //     "menu-shadow": (2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0px 0px 0px 1px rgb(255 255 255 / 9%)),
-  //     "menu-inset": (inset 2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0px 0px 0px 1px rgb(255 255 255 / 9%)),
-  //     "max-width": 60em,
-  //     "open-shadow": rgba(0, 0, 0, 0.5),
-
-  //   ),
-  //   $options
-  // );
-
   // prettier-ignore
   $menu-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0px 0px 0px 1px rgb(255 255 255 / 9%);
   // prettier-ignore
@@ -241,7 +215,7 @@
       & ~ .menu-sidebar {
         width: 100%;
         transform: translateX(-101vw);
-        transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
+        transition: transform 0.3s cubic-bezier(0, 0, 1, 1);
         overflow: scroll;
       }
     }
@@ -291,15 +265,7 @@
         margin: 0 6px;
       }
     }
-  }
 
-  /** */
-
-  // 1. Общие стили для всех интерактивных элементов навигации
-  .nav,
-  .group-list,
-  .sub-group-list,
-  .sub-sub-group-list {
     a,
     label {
       margin: 9px;
@@ -311,68 +277,13 @@
       box-shadow: $menu-shadow;
       transition: all 0.25s ease-in;
       cursor: pointer; // Сразу для всех, a по умолчанию такой
+      background-color: color.adjust($c-bar-light, $lightness: -10%);
 
       &:focus,
       &:hover {
         box-shadow: $menu-inset;
+        background-color: color.adjust($c-bar-light, $lightness: -7%);
       }
-    }
-  }
-
-  // 2. Уровни вложенности: (селектор, базовый_цвет, яркость, яркость_hover)
-  // prettier-ignore
-  $nav-levels: (
-  ".nav":            ($c-bar-light, -10%, -7%),
-  ".group-list":     ($c-bar-light, -7%, -14%),
-  ".sub-group-list": ($c-bar-light, -14%, -21%),
-  ".sub-sub-group-list": ($c-bar-dark, -21%, -32%) // Здесь dark как в оригинале
-);
-
-  @each $selector, $params in $nav-levels {
-    $base-color: list.nth($params, 1); // 2. Используем list.nth
-
-    #{$selector} {
-      a,
-      label {
-        background-color: color.adjust($base-color, $lightness: list.nth($params, 2));
-
-        &:focus,
-        &:hover {
-          background-color: color.adjust($base-color, $lightness: list.nth($params, 3));
-        }
-      }
-    }
-  }
-
-  /**
- * Hide nested lists
- */
-  .group-list,
-  .sub-group-list,
-  .sub-sub-group-list {
-    /* height: 100%; */
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-in-out;
-  }
-
-  .nav__list {
-    input[type="checkbox"] {
-      display: none;
-
-      &:checked {
-        & + label + ul {
-          max-height: 1000px;
-        }
-        & + label > span {
-          transform: rotate(90deg);
-        }
-      }
-    }
-
-    label > span {
-      float: right;
-      transition: transform 0.65s ease;
     }
   }
 }

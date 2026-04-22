@@ -9,78 +9,8 @@
   background-repeat: no-repeat;
 }
 
-.swg-update {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/update_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
 .swg-save {
   background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/save_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
-.swg-create-order {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/shopping_cart_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
-.swg-show-history {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/addchart_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
-.swg-show-profit {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/currency_exchange_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
-.swg-show-need-profit {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/table_view_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
-.swg-number-of-sales-per-day {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/filter_1_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
-.swg-number-of-sales-in-7-days {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/filter_7_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
-.swg-quantity-buy-order {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/scoreboard_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
-.swg-item-price {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/local_mall_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
-.swg-free-price {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/request_quote_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
-.swg-update-selected {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/published_with_changes_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
-.swg-sticker {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/verified_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
-.swg-marketable {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/storefront_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
-.swg-tradable {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/repeat_on_white_24dp.svg");
   background-repeat: no-repeat;
 }
 
@@ -114,18 +44,8 @@
   background-repeat: no-repeat;
 }
 
-.swg-bookmarks {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/bookmarks_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
 .swg-timeline {
   background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/view_timeline_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
-.swg-settings {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/settings_white_24dp.svg");
   background-repeat: no-repeat;
 }
 
@@ -141,27 +61,6 @@
   background-size: contain;
 }
 
-.swg-winrate {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/winrate-color.svg");
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
-.filter-alt {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/filter_alt_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
-.filter-alt-off {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/filter_alt_off_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
-.chevron-right {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/chevron_right_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
 .swg-menu {
   background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/menu_white_24dp.svg");
   background-repeat: no-repeat;
@@ -172,11 +71,6 @@
   background-repeat: no-repeat;
 }
 
-.swg-add {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/add_white_24dp.svg");
-  background-repeat: no-repeat;
-}
-
 .swg-search {
   background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/search_white_24dp.svg");
   background-repeat: no-repeat;
@@ -184,54 +78,4 @@
 
 .logo-extension-icon {
   background-image: url("chrome-extension://__MSG_@@extension_id__/images/128x128.png");
-}
-
-.icon-SilverShield {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/png/SilverShield1.png");
-}
-
-.icon-RedShield {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/png/RedShield1.png");
-}
-
-.icon-GreenShield {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/png/GreenShield1.png");
-}
-
-//иконки
-
-.icon-founder {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/png/clan/founder.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
-.icon-moderator {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/png/clan/moderator.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
-.icon-member {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/png/clan/member.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
-.icon-veteran {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/png/clan/veteran.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
-.icon-veteran {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/png/clan/veteran.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
-.icon-newcomer {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/images/png/clan/newcomer.png");
-  background-repeat: no-repeat;
-  background-size: contain;
 }
