@@ -408,7 +408,7 @@ function setTagColor(tags, selector, dom) {
     listTagsDom.forEach(TagDom => {
       const tagsValue = TagDom.querySelector('.text').textContent;
       const tagObj = tags.find(item => item.value === tagsValue);
-      TagDom.style.setProperty('--user-teg-c', tagObj.color);
+      TagDom.style.setProperty('--c-white', tagObj.color);
     });
   }
 }

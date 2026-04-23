@@ -1,106 +1,96 @@
-@mixin tegify-ui($c-black-olive: #3f3f3f,
-  $c-grey-shadow-dark: #00000094,
-  $c-grey-shadow-light: #ffffff38,
-  $c-grey: #858585) {
-  $r-t-box-shadow: (
-    5px 3px 4px 0px $c-grey-shadow-dark,
-    -1px -4px 5px 0px $c-grey-shadow-light
-  );
-$m-b-shadow-inset: (
-  inset 0 0 10px $c-grey-shadow-dark,
-  inset 0 1px 1px #0a0b0de0,
-  0px 1px $c-grey-shadow-light
-);
+@mixin tegify-ui($c-black-olive: #3f3f3f, $c-grey-shadow-dark: #00000094, $c-grey-shadow-light: #ffffff38, $c-grey: #858585) {
+  $r-t-box-shadow: (5px 3px 4px 0px $c-grey-shadow-dark, -1px -4px 5px 0px $c-grey-shadow-light);
+  $m-b-shadow-inset: (inset 0 0 10px $c-grey-shadow-dark, inset 0 1px 1px #0a0b0de0, 0px 1px $c-grey-shadow-light);
 
-& {
-  --tag-bg: #2d86a7;
-  --tag-hover: var(--c-yellow-dark);
-  --tag-text-color: $c-black-olive;
-  --tags-border-color: silver;
-  --tag-text-color--edit: #111;
-  --tag-remove-bg: var(--tag-hover);
-  --tag-pad: 0.6em 1em;
-  --tag-inset-shadow-size: 1.4em;
-  /* compensate for the larger --tag-pad value */
-  --tag-remove-btn-color: white;
-  --tag-remove-btn-bg--hover: black;
-  border: none;
-  border-radius: 8px;
-  -webkit-box-shadow: $m-b-shadow-inset;
-  box-shadow: $m-b-shadow-inset;
-  transition: none !important;
-}
+  & {
+    --tag-bg: #2d86a7;
+    --tag-hover: var(--c-blue-deep);
+    --tag-text-color: $c-black-olive;
+    --tags-border-color: silver;
+    --tag-text-color--edit: #111;
+    --tag-remove-bg: var(--tag-hover);
+    --tag-pad: 0.6em 1em;
+    --tag-inset-shadow-size: 1.4em;
+    /* compensate for the larger --tag-pad value */
+    --tag-remove-btn-color: white;
+    --tag-remove-btn-bg--hover: black;
+    border: none;
+    border-radius: 8px;
+    -webkit-box-shadow: $m-b-shadow-inset;
+    box-shadow: $m-b-shadow-inset;
+    transition: none !important;
+  }
 
-/* Полностью отключаем расширение фона и смену цвета */
-.tagify__tag:focus div::before,
-.tagify__tag:hover:not([readonly]) div::before {
-  /* Делаем отступ фона нулевым, чтобы он не вылазил наружу */
-  --tag-bg-inset: 0px !important;
+  /* Полностью отключаем расширение фона и смену цвета */
+  .tagify__tag:focus div::before,
+  .tagify__tag:hover:not([readonly]) div::before {
+    /* Делаем отступ фона нулевым, чтобы он не вылазил наружу */
+    --tag-bg-inset: 0px !important;
 
-  /* Дополнительно убираем трансформацию, если она прописана выше */
-  transform: none !important;
-}
+    /* Дополнительно убираем трансформацию, если она прописана выше */
+    transform: none !important;
+  }
 
-.tagify tags {
-  border: none;
-}
+  .tagify tags {
+    border: none;
+  }
 
-//! убираем эффект раздвигания фона
-.tagify__tag {
-  border-radius: 5px 5px 5px 5px !important;
-  background-color: var(--tag-bg) !important;
-  /* Заставляем переменные "наведения" всегда быть равными обычному фону */
-  --tag-hover: var(--tag-bg);
-  --tag-bg--active: var(--tag-bg);
-}
+  //! убираем эффект раздвигания фона
+  .tagify__tag {
+    border-radius: 5px 5px 5px 5px !important;
+    background-color: var(--tag-bg) !important;
+    /* Заставляем переменные "наведения" всегда быть равными обычному фону */
+    --tag-hover: var(--tag-bg);
+    --tag-bg--active: var(--tag-bg);
+  }
 
-/* Полная блокировка всех визуальных изменений через псевдоэлемент */
-.tagify__tag:hover div::before {
-  background: transparent !important;
-  box-shadow: 0 0 0 var(--tag-inset-shadow-size) var(--tag-bg) inset !important;
-  transform: none !important;
-}
+  /* Полная блокировка всех визуальных изменений через псевдоэлемент */
+  .tagify__tag:hover div::before {
+    background: transparent !important;
+    box-shadow: 0 0 0 var(--tag-inset-shadow-size) var(--tag-bg) inset !important;
+    transform: none !important;
+  }
 
-//!-------------------
+  //!-------------------
 
-& .tagify__tag>div {
-  border-radius: 8px;
-  -webkit-box-shadow: $m-b-shadow-inset;
-  box-shadow: $m-b-shadow-inset;
-}
+  & .tagify__tag > div {
+    border-radius: 8px;
+    -webkit-box-shadow: $m-b-shadow-inset;
+    box-shadow: $m-b-shadow-inset;
+  }
 
-& .tagify__tag__removeBtn {
-  margin: 6px;
-}
+  & .tagify__tag__removeBtn {
+    margin: 6px;
+  }
 
-& .tagify__tag__removeBtn {
-  position: relative;
-  display: flex;
-  width: 1.4em;
-  height: 1.4em;
-  margin-right: 10px;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  -moz-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
-  content: "";
-  -webkit-box-shadow: 1px 1px 3px 0px rgb(2, 4, 4);
-  -moz-box-shadow: 1px 1px 3px 0px rgb(2, 4, 4);
-  box-shadow: 1px 1px 3px 0px rgb(2, 4, 4);
-}
+  & .tagify__tag__removeBtn {
+    position: relative;
+    display: flex;
+    width: 1.4em;
+    height: 1.4em;
+    margin-right: 10px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    content: "";
+    -webkit-box-shadow: 1px 1px 3px 0px rgb(2, 4, 4);
+    -moz-box-shadow: 1px 1px 3px 0px rgb(2, 4, 4);
+    box-shadow: 1px 1px 3px 0px rgb(2, 4, 4);
+  }
 
-& .tagify__tag__removeBtn:hover {
-  color: #efefef;
-  background: var(--c-yellow);
-  -webkit-box-shadow: inset 1px 1px 5px 0px rgb(0 0 0);
-  box-shadow: inset 1px 1px 5px 0px rgb(0 0 0);
-}
+  & .tagify__tag__removeBtn:hover {
+    color: #efefef;
+    background: var(--c-blue-dark);
+    -webkit-box-shadow: inset 1px 1px 5px 0px rgb(0 0 0);
+    box-shadow: inset 1px 1px 5px 0px rgb(0 0 0);
+  }
 
-//! увеличивает блок тега
-.tagify__tag>div {
-  margin: 5px;
-}
+  //! увеличивает блок тега
+  .tagify__tag > div {
+    margin: 5px;
+  }
 
-.tagify__input {
-  margin: 10px;
-}
+  .tagify__input {
+    margin: 10px;
+  }
 }

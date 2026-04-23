@@ -110,7 +110,7 @@
 
       &-block {
         position: fixed;
-        background: var(--c-green-dark);
+        background: var(--c-slate-500);
         height: 72px;
         z-index: 3;
         width: 100%;
@@ -234,7 +234,7 @@
     }
 
     &-block {
-      background: var(--c-green-light);
+      background: var(--c-slate-400);
       padding: 5px 5px;
       margin-top: 5px;
       width: 400px;

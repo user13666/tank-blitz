@@ -7,6 +7,7 @@
     --border-color: #000000;
     --bg-main: #7a7a7a;
     --columns: 3;
+    --c-cyan-400: #30b4e4;
 
     display: inline-flex;
     position: relative;
@@ -110,11 +111,11 @@
 }
 
 .icon-item:hover {
-    border-color: #30b4e4;
+    border-color: var(--c-cyan-400);
     background-color: #626262;
 }
 
 .icon-item.selected {
     background: #626262;
-    border-color: #30b4e4;
+    border-color: var(--c-cyan-400);
 }

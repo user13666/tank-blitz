@@ -9,29 +9,29 @@
 @use "./../../elementsStyling/tegify" as *;
 
 :root {
-  --user-teg-c: #ffffff;
-  --c-yellow-light: #30b4e4;
-  --c-yellow: #0c7fa8;
-  --c-yellow-dark: #0c5a76;
+  --c-white: #ffffff;
+  --c-cyan-400: #30b4e4;
+  --c-blue-dark: #0c7fa8;
+  --c-blue-deep: #0c5a76;
 
-  --c-green-light: #414856;
-  --c-green: #303641;
-  --c-green-dark: #353c48;
+  --c-slate-400: #414856;
+  --c-slate-800: #303641;
+  --c-slate-500: #353c48;
 
-  --c-shadow-dark: #2c3139;
-  --c-shadow-light: #4f586a;
+  --c-slate-900: #2c3139;
+  --c-slate-300: #4f586a;
 
   --c-white: white;
 
-  --c-grey-light: #cecece;
-  --c-grey: #858585;
-  --c-grey-dark: #585858;
+  --c-grey-100: #cecece;
+  --c-grey-500: #858585;
+  --c-grey-900: #585858;
 
-  --c-grey-shadow-dark: #00000094;
-  --c-grey-shadow-light: #ffffff38;
+  --c-black-alpha: #00000094;
+  --c-grey-alpha: #ffffff38;
 
   --r-t-box-shadow: 5px 5px 10px #242931, -4px -4px 8px #3c4351, inset 1px 1px 1px rgba(255, 255, 255, 0.1);
-  --m-b-shadow-inset: inset 0 0 10px var(--c-grey-shadow-dark), inset 0 1px 1px #0a0b0de0, 0px 1px var(--c-grey-shadow-light);
+  --m-b-shadow-inset: inset 0 0 10px var(--c-black-alpha), inset 0 1px 1px #0a0b0de0, 0px 1px var(--c-grey-alpha);
 
   --r-t-col-width-min: 10%;
   --r-t-col-width-max: 40%;
@@ -48,7 +48,7 @@ $config: (
 @include radio-ui($config);
 ::-webkit-scrollbar {
   width: 6px;
-  background-color: var(--c-green);
+  background-color: var(--c-slate-800);
 
   &-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -57,7 +57,7 @@ $config: (
   }
 
   &-thumb {
-    background-color: var(--c-green-dark);
+    background-color: var(--c-slate-500);
   }
 }
 
@@ -66,8 +66,8 @@ html {
   margin: 0px;
   padding: 0px;
   font-family: sans-serif;
-  color: var(--c-grey-light);
-  background: var(--c-green-light);
+  color: var(--c-grey-100);
+  background: var(--c-slate-400);
 }
 
 a {
@@ -75,15 +75,15 @@ a {
   text-decoration: none;
 }
 
-@include page-ui($nav-bar-width: 250px, $c-heder: var(--c-green), $c-bar-dark: #2c3139, $c-bar: #2c3139, $c-bar-light: #4f586a, $c-color: var(--c-white), $c-hover: var(--c-yellow-light), $n-box-shadow: var(--r-t-box-shadow));
+@include page-ui($nav-bar-width: 250px, $c-heder: var(--c-slate-800), $c-bar-dark: #2c3139, $c-bar: #2c3139, $c-bar-light: #4f586a, $c-color: var(--c-white), $c-hover: var(--c-cyan-400), $n-box-shadow: var(--r-t-box-shadow));
 
 .content ul,
 .content li {
   overflow: visible;
 }
 
-@include input-values(var(--c-yellow), var(--c-green-dark));
-@include switched-button($c-text: var(--c-green-dark), $c-switched-btn: var(--c-green-light), $c-switched-bg: var(--c-yellow));
+@include input-values(var(--c-blue-dark), var(--c-slate-500));
+@include switched-button($c-text: var(--c-slate-500), $c-switched-btn: var(--c-slate-400), $c-switched-bg: var(--c-blue-dark));
 
 #control-panel {
   display: none;
@@ -203,9 +203,9 @@ a.statistics {
   padding: 10px;
   border-radius: 5px;
   box-shadow: var(--m-b-shadow-inset);
-  background: var(--c-grey);
+  background: var(--c-grey-500);
   font-weight: 900;
-  color: var(--c-green-dark);
+  color: var(--c-slate-500);
 }
 
 .dangerous-group {
@@ -228,7 +228,7 @@ a.statistics {
     text-align: right;
     padding-right: 48px;
     font-weight: 700;
-    border: solid 2px var(--c-shadow-dark);
+    border: solid 2px var(--c-slate-900);
   }
 
   &-btn {

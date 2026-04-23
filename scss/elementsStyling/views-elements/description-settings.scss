@@ -5,7 +5,7 @@ $desc-theme: (
 	"border": var(--c-blue-300),
 	"accent": var(--c-cyan-400),
 	"shadow": rgba(#000, 0.15),
-	"grad-base": linear-gradient(135deg, rgba(#de4a4a, 0.15), rgba(#30b4e4, 0.1) 20%, var(--c-blue-700) 40%),
+	"grad-base": linear-gradient(135deg, rgba(#de4a4a, 0.15), rgba(var(--c-cyan-400), 0.1) 20%, var(--c-blue-700) 40%),
 	"grad-line": linear-gradient(179deg, rgb(13 13 33 / 69%), rgba(48, 180, 228, 0.1) 20%, var(--c-blue-700) 40%)
 );
 
