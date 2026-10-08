@@ -1,21 +1,35 @@
 @mixin responsive-table($c-background, $c-yellow-light, $r-t-box-shadow, $r-t-col-width-min, $r-t-col-width-max) {
-  $r-t-block-shadow:
-    2px 2px 4px 0px rgba(0, 0, 0, 0.58),
-    0px 0px 0px 1px rgba(255, 255, 255, 0.09);
-
-  &-container {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
   &-item {
+    &__shadow {
+      box-shadow:
+        0px 1px 2px hsl(222deg 13.89% 14.12%),
+        -1px -1px 0px hsl(222deg 3.81% 31.44%),
+        inset -1px -1px 1px hsl(222deg 3.81% 31.44%),
+        inset 1px 1px 1px hsl(222deg 13.89% 14.12%);
+      &-position {
+        margin: 4px 4px;
+        border-radius: 5px;
+      }
+    }
+
     &__img {
-      width: 60px;
-      height: 60px;
-      -webkit-box-shadow: $r-t-block-shadow;
-      box-shadow: $r-t-block-shadow;
+      width: 44px;
+      height: 44px;
+      -webkit-box-shadow: var(--shadow-outline);
+      box-shadow: var(--shadow-outline);
+
+      &-border {
+        position: relative;
+        width: 70px;
+        height: 40px;
+        border: 7px solid;
+        border-radius: 50%;
+        box-shadow:
+          0px 1px 2px hsl(222deg 13.89% 14.12%),
+          -1px -1px 0px hsl(222deg 3.81% 31.44%),
+          inset -1px -1px 1px hsl(222deg 3.81% 31.44%),
+          inset 1px 1px 1px hsl(222deg 13.89% 14.12%);
+      }
     }
 
     &__data {
@@ -28,17 +42,26 @@
       align-items: center;
       justify-content: center;
       min-height: 42px;
-      // -webkit-box-shadow: $r-t-block-shadow;
-      // box-shadow: $r-t-block-shadow;
 
       &-tags {
+        margin: 0px;
         width: 100%;
+      }
+      &-block {
+        width: 360px;
+        font-size: 15px;
+        margin-left: 5px;
       }
     }
   }
 
   &-responsive-table {
-    padding: 0px;
+    z-index: 1;
+    padding: 5px;
+
+    &_settings {
+      margin: 11px 0px;
+    }
 
     &-li,
     &-li-item {
@@ -59,11 +82,6 @@
       @media (max-width: 60em) {
         display: none !important;
       }
-
-      &_extension-menu {
-        top: 150px;
-        right: 30px;
-      }
     }
 
     &__row,
@@ -80,6 +98,7 @@
     }
 
     &__badge {
+      height: 35px;
       position: absolute;
       top: -29px;
       left: 4px;
@@ -99,12 +118,26 @@
     }
 
     &__col {
+      font-size: 13px;
+      font-weight: 600;
       display: flex;
       min-height: 42px;
       text-align: center;
       align-items: center;
       flex-wrap: wrap;
       justify-content: center;
+
+      &.market_name {
+        margin: 0 0.3%;
+        padding: 4px;
+        font-size: 14px;
+        color: #3f3f3f;
+        word-break: break-all;
+        cursor: pointer;
+        position: relative;
+        box-shadow: var(--shadow-inner-deep);
+        background-color: var(--c-grey-500);
+      }
 
       &_hidden-block {
         display: none;
@@ -176,6 +209,7 @@
       }
 
       &-li {
+        margin-bottom: 0;
         display: flex;
         flex-direction: column;
       }

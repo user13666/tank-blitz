@@ -83,7 +83,7 @@ chrome.storage.local.get(
 //! !кликаем по списку пользователей делегирование событий один обработчик для всех
 async function showUserData(extensionSettings) {
   // Находим таблицу один раз
-  const memberList = document.querySelector('#table-users .extension-responsive-table');
+  const memberList = document.querySelector('#table-users .ext-responsive-table');
 
   // Вешаем клик на всю таблицу
   memberList.addEventListener('click', async event => {
@@ -176,8 +176,8 @@ async function handleTagAction() {
     {
       prefix: 'roles',
       fields: rolesFields,
-      title: 'Цвета % побед',
-      description: 'Здесь задается цвет в зависимости какой процент побед.',
+      title: 'Количество месяцев',
+      description: 'Здесь задается сколько месяцев состоит в клане для определенной роли расположены по возрастанию.',
       icon: 'winrate',
     },
   ];
@@ -360,7 +360,7 @@ async function runLoadClanMembers(clanId, extensionSettings) {
 
     const clanMembers = await getClanData(extensionSettings);
     if (!clanMembers) {
-      removeAllDom('.extension-responsive-table__item');
+      removeAllDom('.ext-responsive-table__item');
       setProgress(100);
       return;
     }
@@ -392,7 +392,7 @@ async function runLoadClanMembers(clanId, extensionSettings) {
 
   // Первоначальное отображение (из кэша БД)
   if (!clanData) {
-    removeAllDom('.extension-responsive-table__item');
+    removeAllDom('.ext-responsive-table__item');
     setProgress(100);
     return;
   }
@@ -404,7 +404,7 @@ async function runLoadClanMembers(clanId, extensionSettings) {
 
 function setTagColor(tags, selector, dom) {
   if (dom) {
-    const listTagsDom = dom.querySelectorAll(selector); // .tags-row
+    const listTagsDom = dom.querySelectorAll(selector); // .tag-row
     listTagsDom.forEach(TagDom => {
       const tagsValue = TagDom.querySelector('.text').textContent;
       const tagObj = tags.find(item => item.value === tagsValue);
@@ -416,8 +416,8 @@ function setTagColor(tags, selector, dom) {
 async function showUsers(members, extensionSettings) {
   if (!members) return;
 
-  const memberList = document.querySelector('#table-users .extension-responsive-table');
-  removeAllDom('.extension-responsive-table__item');
+  const memberList = document.querySelector('#table-users .ext-responsive-table');
+  removeAllDom('.ext-responsive-table__item');
 
   const membersArray = Object.values(members);
   const usersIdArr = membersArray.map(memberData => memberData.account_id);
@@ -457,12 +457,12 @@ async function showUsers(members, extensionSettings) {
 
     // Настройка тегов
     const userTagsDom = document.getElementById(`tags-${account_id}`);
-    setTagColor(tags, '.tags-row', userTagsDom);
+    setTagColor(tags, '.tag-row', userTagsDom);
 
     currentRow.dataset.userdata = JSON.stringify({ userData });
     // Больше никакой привязки .onclick внутри цикла!
   }
-  const nameBlock = document.querySelector('#table-users p.extension-responsive-table__col.extension-responsive-table__col_width-max');
+  const nameBlock = document.querySelector('#table-users p.ext-responsive-table__col.ext-responsive-table__col_width-max');
   sortingName(nameBlock);
   addUserDate(); // отобразить элемент даты
   await savePointsUsers(usersIdArr, members, extensionSettings);
@@ -570,7 +570,7 @@ async function showTags(extensionSettings) {
                     <x title='' class='tagify__tag__removeBtn' role='button' aria-label='remove tag'></x>
                     <div>
                         <!-- Элемент круга -->
-                        <span class='tag-circle extension-item__shadow' style='background: ${tagData.color || '#000'}'></span>
+                        <span class='tag-circle ext-item__shadow' style='background: ${tagData.color || '#000'}'></span>
                         <span class='tagify__tag-text'>${tagData.value}</span>
                     </div>
                 </tag>
@@ -620,8 +620,8 @@ function sortingName(currentDom) {
 }
 
 function sortingDomObject(asc) {
-  const container = document.querySelector('#table-users .extension-responsive-table.list');
-  const items = Array.from(container.querySelectorAll('.extension-responsive-table__item'));
+  const container = document.querySelector('#table-users .ext-responsive-table.list');
+  const items = Array.from(container.querySelectorAll('.ext-responsive-table__item'));
   // Кешируем имена, чтобы не парсить JSON постоянно
   const mapped = items.map(el => ({
     el,
@@ -820,7 +820,7 @@ async function showSelectedPoints(requirement) {
     const pointsBlock = document.getElementById('account-point');
     showUserStats(stats, pointsBlock);
     editPoints(stats, requirement);
-    const chartBlock = document.querySelector('.stats-chart');
+    const chartBlock = document.querySelector('.chart-stats');
     pointsChart(chartBlock);
     showMyPointsChart(stats, requirement);
   };
@@ -844,13 +844,13 @@ async function displayUsersData(usersArr) {
   removeAllDom('.user-data-row');
   const clans = (await AppDB.clans.clansData.toArray()) ?? {};
   const clansNamesArr = clans.map(c => c.name);
-  const tableBlock = document.querySelector('#all-users .extension-responsive-table');
+  const tableBlock = document.querySelector('#all-users .ext-responsive-table');
   if (usersArr.length === 0) return;
   usersArr.forEach(user => {
     userRow(tableBlock, user, clansNamesArr);
     const { id, stats, tags } = user;
     const userTags = document.getElementById(`user-tags-${id}`);
-    setTagColor(tags, '.tags-row', userTags);
+    setTagColor(tags, '.tag-row', userTags);
     if (!isNotEmptyObj(stats)) return;
     const chartDom = document.getElementById(`user-points-chart-${id}`);
     if (chartDom) {

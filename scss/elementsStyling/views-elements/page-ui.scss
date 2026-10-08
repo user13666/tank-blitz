@@ -20,9 +20,9 @@
 
 @mixin page-ui($nav-bar-width: 250px, $c-heder, $c-bar-dark, $c-bar, $c-bar-light, $c-color, $c-hover, $n-box-shadow) {
   // prettier-ignore
-  $menu-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0px 0px 0px 1px rgb(255 255 255 / 9%);
+  $menu-shadow: var(--shadow-outline);
   // prettier-ignore
-  $menu-inset: inset 2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0px 0px 0px 1px rgb(255 255 255 / 9%);
+  $menu-inset: inset var(--shadow-outline);
 
   ul,
   li {

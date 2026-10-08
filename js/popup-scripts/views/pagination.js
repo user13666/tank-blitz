@@ -45,7 +45,7 @@ function renderPaginationNav({ totalPages, currentPage, pages }, selector) {
   const container = document.querySelector(selector);
   if (!container) return;
 
-  const navHtml = html` <div class="extension-pagination-sidebar">
+  const navHtml = html` <div class="ext-pagination-sidebar">
     ${pages.map(
       page => html`
     <a class="page-link" data-page="${page}" style="cursor: pointer;">

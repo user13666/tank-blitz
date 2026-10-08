@@ -90,11 +90,11 @@ export function userTableRow(dom, data, tags, pasteOptionDom = 'beforeend') {
 
   let tagsDomBlock = nothing; // По умолчанию ничего не выводим
   if (tags.length > 0) {
-    tagsDomBlock = html` <li class="extension-responsive-table__row extension-responsive-table-li extension-responsive-table__col-tags" id="tags-${account_id}">
-      <div class="extension-responsive-table__col extension-item__data extension-item__data-tags">
+    tagsDomBlock = html` <li class="ext-responsive-table__row ext-responsive-table-li ext-responsive-table__col-tags" id="tags-${account_id}">
+      <div class="ext-responsive-table__col ext-item__data ext-item__data-tags">
         ${tags.map(
           tag =>
-            html` <div class="tags-row">
+            html` <div class="tag-row">
               <div class="cutout-element cutout-element__left"></div>
               <div class="text">${tag.value}</div>
               <div class="cutout-element cutout-element__right"></div>
@@ -103,14 +103,14 @@ export function userTableRow(dom, data, tags, pasteOptionDom = 'beforeend') {
       </div>
     </li>`;
   }
-  const responsiveTableRow = html` <div class="extension-responsive-table__item account-rows" id="account_id-${account_id}">
-    <li class="extension-responsive-table__row extension-responsive-table-li">
-      <div class="extension-responsive-table__col extension-responsive-table__col_width-max market_name" data-label="Name">
-        <p class="extension-item__data extension-responsive-table__badge">
+  const responsiveTableRow = html` <div class="ext-responsive-table__item account-rows" id="account_id-${account_id}">
+    <li class="ext-responsive-table__row ext-responsive-table-li">
+      <div class="ext-responsive-table__col ext-responsive-table__col_width-max market_name" data-label="Name">
+        <p class="ext-item__data ext-responsive-table__badge">
           <img class="select-img " src="${chrome.runtime.getURL(`${icon}`)}" />
           ${role}
         </p>
-        <div class="extension-responsive-table__col extension-item__data shadow-wrap badge">
+        <div class="ext-responsive-table__col ext-item__data shadow-wrap badge">
           <div class="badge">
             <div class="blob"></div>
             <p class="blob-description">${requirement}</p>
@@ -118,31 +118,31 @@ export function userTableRow(dom, data, tags, pasteOptionDom = 'beforeend') {
         </div>
         <span>${nickname}</span>
       </div>
-      <div class="extension-responsive-table__col extension-responsive-table__col_width-min extension-item__data extension-item__shadow extension-item__shadow-position" data-label="Date">
+      <div class="ext-responsive-table__col ext-responsive-table__col_width-min ext-item__data ext-item__shadow ext-item__shadow-position" data-label="Date">
         <div class=" ">📅 ${joined_at_time_ago}</div>
       </div>
-      <div class="extension-responsive-table__col extension-responsive-table__col_width-min extension-item__data extension-item__shadow extension-item__shadow-position" data-label="Date">
+      <div class="ext-responsive-table__col ext-responsive-table__col_width-min ext-item__data ext-item__shadow ext-item__shadow-position" data-label="Date">
         <div class="">⌛ ${last_battle_time_ago}</div>
       </div>
-      <div class="extension-responsive-table__col extension-responsive-table__col_width-min extension-item__data extension-item__shadow extension-item__shadow-position" data-label="Date">
+      <div class="ext-responsive-table__col ext-responsive-table__col_width-min ext-item__data ext-item__shadow ext-item__shadow-position" data-label="Date">
         <div class="">⚔️ ${battles}</div>
       </div>
-      <div class="extension-responsive-table__col extension-responsive-table__col_width-min" data-label="Date">
-        <div class="extension-item__data">
-          <div class="extension-item__img-border" style="border-color: ${color};"></div>
+      <div class="ext-responsive-table__col ext-responsive-table__col_width-min" data-label="Date">
+        <div class="ext-item__data">
+          <div class="ext-item__img-border" style="border-color: ${color};"></div>
           <p class="blob-description">%${winRate}</p>
         </div>
       </div>
-      <div class="extension-responsive-table__col extension-responsive-table__col_width-min extension-item__data extension-item__shadow extension-item__shadow-position" data-label="Price">
+      <div class="ext-responsive-table__col ext-responsive-table__col_width-min ext-item__data ext-item__shadow ext-item__shadow-position" data-label="Price">
         <div class="">💥 ${avgDamage}</div>
       </div>
-      <div class="extension-responsive-table__col extension-responsive-table__col_width-min extension-responsive-table__col_hidden-block extension-item__data">
-        <div id="p_chart-${account_id}" class="mini-chart ">
+      <div class="ext-responsive-table__col ext-responsive-table__col_width-min ext-responsive-table__col_hidden-block ext-item__data">
+        <div id="p_chart-${account_id}" class="chart-mini ">
           <canvas id="points-chart-${account_id}" style="display:none;"></canvas>
         </div>
       </div>
 
-      <div class="extension-responsive-table__col extension-responsive-table__col_width-min extension-item__data " style="margin: 6px 0px;">
+      <div class="ext-responsive-table__col ext-responsive-table__col_width-min ext-item__data " style="margin: 6px 0px;">
         <div>
           Очки
           <input class="settings-input settings-input-number user-input user-input-min-height user-point" id="point-${account_id}" name="userPoints" type="number" value="${getRandomInt(0, 100)}" min="0" max="" step="1" />
@@ -164,24 +164,24 @@ export function userTableRow(dom, data, tags, pasteOptionDom = 'beforeend') {
 }
 export function userStatistics(dom, data) {
   const { avgDamage, battles, winRate } = data;
-  const userStatisticDom = html` <ul class="extension-responsive-table__sidebar-row" id="user-statistic">
-      <li class="extension-responsive-table-li-item">
-        <div class="extension-responsive-table__col extension-responsive-table__col_width-min extension-item__data extension-item__shadow extension-item__shadow-position">Урон : ${avgDamage}</div>
-        <div class="extension-responsive-table__col extension-responsive-table__col_width-min extension-item__data extension-item__shadow extension-item__shadow-position">Боёв: ${battles}</div>
-        <div class="extension-responsive-table__col extension-responsive-table__col_width-min extension-item__data extension-item__shadow extension-item__shadow-position">Побед: ${winRate}%</div>
+  const userStatisticDom = html` <ul class="ext-responsive-table__sidebar-row" id="user-statistic">
+      <li class="ext-responsive-table-li-item">
+        <div class="ext-responsive-table__col ext-responsive-table__col_width-min ext-item__data ext-item__shadow ext-item__shadow-position">Урон : ${avgDamage}</div>
+        <div class="ext-responsive-table__col ext-responsive-table__col_width-min ext-item__data ext-item__shadow ext-item__shadow-position">Боёв: ${battles}</div>
+        <div class="ext-responsive-table__col ext-responsive-table__col_width-min ext-item__data ext-item__shadow ext-item__shadow-position">Побед: ${winRate}%</div>
       </li>
     </ul>
 
-    <li class="extension-responsive-table-li-item" id="add-block">
-      <div class="extension-responsive-table__col extension-responsive-table__col_width-max">
+    <li class="ext-responsive-table-li-item" id="add-block">
+      <div class="ext-responsive-table__col ext-responsive-table__col_width-max">
         Дата
         <input class="settings-input settings-input-number user-input user-input-max-height flatpickr-input" id="add-user-date" placeholder="Дата..." type="text" readonly="readonly" />
       </div>
-      <div class="extension-responsive-table__col extension-responsive-table__col_width-max">
+      <div class="ext-responsive-table__col ext-responsive-table__col_width-max">
         Очки
         <input class="settings-input settings-input-number user-input user-input-max-height" id="add-user-point" type="number" value="72" min="0" max="" step="1" />
       </div>
-      <div class="extension-responsive-table__col extension-responsive-table__col_width-max">
+      <div class="ext-responsive-table__col ext-responsive-table__col_width-max">
         Кооп
         <input class="settings-input settings-input-number user-input user-input-max-height" id="add-user-teamwork" type="number" value="86" min="0" max="" step="1" />
       </div>
@@ -202,24 +202,24 @@ export function showUserStats(points, dom) {
             <!-- Скрытый чекбокс выступает в роли "состояния" (режим редактирования ВКЛ/ВЫКЛ) -->
             <input type="checkbox" id="toggle-edit-${key}" class="state-toggle" hidden />
 
-            <ul class="extension-responsive-table__sidebar-row side-front" id="value-block-${key}">
-              <li class="extension-responsive-table-li-item">
+            <ul class="ext-responsive-table__sidebar-row side-front" id="value-block-${key}">
+              <li class="ext-responsive-table-li-item">
                 <a id="delete-btn-${key}">
                   <div class="swg-delete nav-icon  nav-icon_min nav-icon_menu"></div>
                 </a>
                 <div class="user-stats">
                   Дата
-                  <div class="extension-responsive-table__col extension-responsive-table__col_width-max market_name" id="user-date-${key}">${key}</div>
+                  <div class="ext-responsive-table__col ext-responsive-table__col_width-max market_name" id="user-date-${key}">${key}</div>
                 </div>
 
                 <div class="user-stats">
                   Очки
-                  <div class="extension-responsive-table__col extension-responsive-table__col_width-max market_name" id="user-point-${key}">${point}</div>
+                  <div class="ext-responsive-table__col ext-responsive-table__col_width-max market_name" id="user-point-${key}">${point}</div>
                 </div>
 
                 <div class="user-stats">
                   Кооп
-                  <div class="extension-responsive-table__col extension-responsive-table__col_width-max market_name" id="user-teamwork-${key}">${teamwork}</div>
+                  <div class="ext-responsive-table__col ext-responsive-table__col_width-max market_name" id="user-teamwork-${key}">${teamwork}</div>
                 </div>
 
                 <label for="toggle-edit-${key}">
@@ -228,20 +228,20 @@ export function showUserStats(points, dom) {
               </li>
             </ul>
 
-            <ul class="extension-responsive-table__sidebar-row side-back">
-              <li class="extension-responsive-table-li-item">
+            <ul class="ext-responsive-table__sidebar-row side-back">
+              <li class="ext-responsive-table-li-item">
                 <a id="update-btn-${key}">
                   <div class="swg-save nav-icon  nav-icon_min nav-icon_menu"></div>
                 </a>
-                <div class="extension-responsive-table__col extension-responsive-table__col_width-max">
+                <div class="ext-responsive-table__col ext-responsive-table__col_width-max">
                   Дата
                   <input class="settings-input settings-input-number user-input user-input-max-height" id="edit-user-date-${key}" placeholder="Дата..." />
                 </div>
-                <div class="extension-responsive-table__col extension-responsive-table__col_width-max">
+                <div class="ext-responsive-table__col ext-responsive-table__col_width-max">
                   Очки
                   <input class="settings-input settings-input-number user-input user-input-max-height" id="edit-user-point-${key}" type="number" value="${point}" min="0" max="" step="1" />
                 </div>
-                <div class="extension-responsive-table__col extension-responsive-table__col_width-max">
+                <div class="ext-responsive-table__col ext-responsive-table__col_width-max">
                   Кооп
                   <input class="settings-input settings-input-number user-input user-input-max-height" id="edit-user-teamwork-${key}" type="number" value="${teamwork}" min="0" max="" step="1" />
                 </div>
@@ -277,11 +277,11 @@ export function userRow(dom, data, clansNamesArr, pasteOptionDom = 'beforeend') 
   let tagsDomBlock = nothing; // По умолчанию ничего не выводим
 
   if (tags.length > 0) {
-    tagsDomBlock = html` <li class="extension-responsive-table__row extension-responsive-table-li extension-responsive-table__col-tags" id="user-tags-${id}">
-      <div class="extension-responsive-table__col extension-item__data extension-item__data-tags">
+    tagsDomBlock = html` <li class="ext-responsive-table__row ext-responsive-table-li ext-responsive-table__col-tags" id="user-tags-${id}">
+      <div class="ext-responsive-table__col ext-item__data ext-item__data-tags">
         ${tags.map(
           tag =>
-            html` <div class="tags-row">
+            html` <div class="tag-row">
               <div class="cutout-element cutout-element__left"></div>
               <div class="text">${tag.value}</div>
               <div class="cutout-element cutout-element__right"></div>
@@ -290,13 +290,13 @@ export function userRow(dom, data, clansNamesArr, pasteOptionDom = 'beforeend') 
       </div>
     </li>`;
   }
-  const responsiveTableRow = html` <div class="extension-responsive-table__item user-data-row" id="account_id-${id}">
-    <li class="extension-responsive-table__row extension-responsive-table-li">
-      <div class="extension-responsive-table__col extension-responsive-table__col_width-min market_name" data-label="Имя">${name}</div>
-      <div class="extension-responsive-table__col extension-responsive-table__col_width-min extension-item__data" data-label="Клан">${clanName}</div>
-      <div class="extension-responsive-table__col extension-responsive-table__col_width-min extension-item__data" data-label="Состоит">${ex ? 'Нет' : 'Да'}</div>
-      <div class="extension-responsive-table__col extension-responsive-table__col_width-min extension-responsive-table__col_hidden-block extension-item__data" data-label="Date">
-        <div id="user-p_chart-${id}" class="mini-chart ">
+  const responsiveTableRow = html` <div class="ext-responsive-table__item user-data-row" id="account_id-${id}">
+    <li class="ext-responsive-table__row ext-responsive-table-li">
+      <div class="ext-responsive-table__col ext-responsive-table__col_width-min market_name" data-label="Имя">${name}</div>
+      <div class="ext-responsive-table__col ext-responsive-table__col_width-min ext-item__data" data-label="Клан">${clanName}</div>
+      <div class="ext-responsive-table__col ext-responsive-table__col_width-min ext-item__data" data-label="Состоит">${ex ? 'Нет' : 'Да'}</div>
+      <div class="ext-responsive-table__col ext-responsive-table__col_width-min ext-responsive-table__col_hidden-block ext-item__data" data-label="Date">
+        <div id="user-p_chart-${id}" class="chart-mini">
           <canvas id="user-points-chart-${id}" style="display: none;"></canvas>
         </div>
       </div>
@@ -318,26 +318,26 @@ function settingTemplate(itemData, prefix, fieldConfigs) {
   // 1. Шаблоны теперь возвращают Lit TemplateResult
   const templates = {
     color: (val, inputId) => ({
-      view: html` <div class="extension-responsive-table__sidebar-row extension-item__data">
+      view: html` <div class="ext-responsive-table__sidebar-row ext-item__data">
         <div class="select-color" style="background-color: ${val}"></div>
       </div>`,
-      edit: html` <div class="extension-responsive-table__sidebar-row extension-item__data">
+      edit: html` <div class="ext-responsive-table__sidebar-row ext-item__data">
         <input class="select-color" id="${inputId}" .value="${val}" type="color" />
       </div>`,
     }),
 
     input: (val, inputId, type) => ({
       view: html` <div class="settings-name user-stats">
-        <div class="extension-responsive-table__sidebar-row extension-responsive-table__col_width-max extension-item__data">${val}</div>
+        <div class="ext-responsive-table__sidebar-row ext-responsive-table__col_width-max ext-item__data">${val}</div>
       </div>`,
-      edit: html` <div class="extension-responsive-table__sidebar-row extension-responsive-table__col_width-max extension-item__data">
+      edit: html` <div class="ext-responsive-table__sidebar-row ext-responsive-table__col_width-max ext-item__data">
         <input class="settings-input settings-input-number user-input user-input-max-height" id="${inputId}" type="${type}" .value="${val ?? ''}" />
       </div>`,
     }),
 
     picker: (val, inputId) => ({
       view: html` <div class="user-stats select-img">
-        <img id="img-${inputId}" src="${val || ''}" class="extension-responsive-table__sidebar-row extension-item__data select-img" />
+        <img id="img-${inputId}" src="${val || ''}" class="ext-responsive-table__sidebar-row ext-item__data select-img" />
       </div>`,
       edit: html` <div id="block-${inputId}"></div>
         <input class="hidden" id="${inputId}" type="text" .value="${val || ''}" />`,
@@ -373,7 +373,7 @@ export function renderItemBlock(container, descriptionData, insertPosition = 'be
     const btnId = `${prefix}-${btnType}-btn`;
     const itemId = `${prefix}-${btnType}-item`;
 
-    return html` <li class="extension-responsive-table-li" id="${itemId}">
+    return html` <li class="ext-responsive-table-li" id="${itemId}">
       ${innerHtml}
       <a id="${btnId}">
         <div class="swg-${iconType} nav-icon nav-icon_min nav-icon_menu"></div>
@@ -430,8 +430,8 @@ export function renderItemList(container, itemData, prefix, fieldConfigs, insert
     const sideId = side === 'front' ? `${prefix}-block-${id}` : undefined;
     const iconClass = btnType === 'update' ? 'save' : btnType;
 
-    return html` <ul class="extension-responsive-table__sidebar-row side-${side}" id="${sideId ?? ''}">
-      <li class="extension-responsive-table-li-item">
+    return html` <ul class="ext-responsive-table__sidebar-row side-${side}" id="${sideId ?? ''}">
+      <li class="ext-responsive-table-li-item">
         <a id="${btnId}">
           <div class="swg-${iconClass} nav-icon nav-icon_min nav-icon_menu"></div>
         </a>

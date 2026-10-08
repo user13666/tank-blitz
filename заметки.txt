@@ -171,3 +171,87 @@ extension-section
 extension-feature 
 -gradient-box
 -select-color 
+
+
+  /* --- 2. ФУНКЦИОНАЛЬНЫЕ ПЕРЕМЕННЫЕ (Для дашборда) --- */
+
+  // /* Статусные цвета (семантика) */
+  // --status-info: #3595f6; /* Синий — информация */
+  // --status-success: #28a745; /* Зеленый — успех */
+  // --status-warning: #ffc107; /* Желтый — внимание */
+  // --status-error: #dc3545; /* Красный — ошибка */
+
+  /* цвета блока INFO ? */
+  --info-bg: transparent; /*цвет иконки*/
+  --info-bg-icon: transparent; /* полупрозрачный фон для иконки */
+  --info-border: transparent;
+  --info-shadow: transparent;
+
+  --info-popup-bg: var(--color-slate-800);
+  --info-popup-text: var(--color-white);
+  --info-popup-border: var(--color-slate-600);
+  --info-popup-shadow: var(--color-slate-600);
+  /*----------*/
+
+  /*  блока панели управления pnl (panel) */
+  --pnl-bg: transparent; /*цвет иконки*/
+  --pnl-bg-icon: transparent; /* полупрозрачный фон для иконки */
+  --pnl-border: transparent;
+  --pnl-shadow: transparent;
+
+  --pnl-row-bg: var(--color-slate-800);
+  --pnl-row-text: var(--color-white);
+  --pnl-row-input: var(--color-white);
+  --pnl-row-border: var(--color-slate-600);
+  --pnl-row-shadow: var(--color-slate-600);
+  /*----------*/
+
+  /*  блока responsive table (rt)*/
+  --rt-bg: transparent; /*цвет иконки*/
+  --rt-bg-icon: transparent; /* полупрозрачный фон для иконки */
+  --rt-border: transparent;
+  --rt-shadow: transparent;
+
+  --rt-row-bg: var(--color-slate-800);
+  --rt-row-text: var(--color-white);
+  --rt-row-input: var(--color-white);
+  --rt-row-border: var(--color-slate-600);
+  --rt-row-shadow-1: var(--color-slate-600);
+  --rt-row-shadow-2: var(--color-slate-600);
+  --rt-row-shadow-3: var(--color-slate-600);
+  /*----------*/
+
+  /* Sidebar */
+  --sb-bg: var(--clr-slate-800);
+  --sb-bg-hover: var(--clr-slate-700);
+  --sb-text: var(--clr-blue-light);
+  --sb-input: var(--clr-blue-light);
+  --sb-accent: var(--clr-cyan-500); //визуальный элемент, который выделяет активные пункты меню
+  --sb-shadow: var(--color-slate-600);
+  --sb-width-collapsed: 80px;
+  --sb-width-expanded: 260px;
+
+  /* Dashboard Content */
+  --db-bg: var(--clr-slate-900);
+  --db-card-bg: var(--clr-slate-700);
+  --db-text-main: var(--clr-white);
+  --db-text-muted: var(--clr-blue-soft);
+
+  /* button */
+  --btn-bg: var(--clr-slate-800);
+  --btn-bg-hover: var(--clr-slate-700);
+  --btn-text: var(--clr-blue-light);
+  --btn-shadow: var(--color-slate-600);
+  --btn-shadow-hover: var(--color-slate-600);
+  --btn-icon: 70px;
+  --btn-width-min: 80px;
+  --btn-width-max: 260px;
+
+  /* User Tag (то, что вы просили) */
+  --tag-user-bg: var(--clr-cyan-600);
+  --tag-user-text: var(--clr-white);
+  --tag-user-radius: 4px;
+  --tag-user-pad: 0.2em 0.6em;
+
+  /* Shadows */
+  --shadow-main: 0 4px 12px var(--clr-black-alpha);

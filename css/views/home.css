@@ -5,6 +5,12 @@
   background-repeat: no-repeat;
 }
 
+.swg-winrate {
+  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/winrate-color.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .swg-edit {
   background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/edit_note_white_24dp.svg");
   background-repeat: no-repeat;
@@ -83,8 +89,8 @@
 
 :root {
   --c-white: #ffffff;
-  --c-cyan-400: #30b4e4;
-  --c-blue-dark: #0c7fa8;
+  --c-cyan-400: rgb(48, 180, 228);
+  --c-blue-dark: rgb(12, 127, 168);
   --c-blue-deep: #0c5a76;
   --c-slate-400: #414856;
   --c-slate-800: #303641;
@@ -97,8 +103,9 @@
   --c-grey-900: #585858;
   --c-black-alpha: #00000094;
   --c-grey-alpha: #ffffff38;
-  --r-t-box-shadow: 5px 5px 10px #242931, -4px -4px 8px #3c4351, inset 1px 1px 1px rgba(255, 255, 255, 0.1);
-  --m-b-shadow-inset: inset 0 0 10px var(--c-black-alpha), inset 0 1px 1px #0a0b0de0, 0px 1px var(--c-grey-alpha);
+  --shadow-raised: 5px 5px 10px #242931, -4px -4px 8px #3c4351, inset 1px 1px 1px rgba(255, 255, 255, 0.1);
+  --shadow-inner-deep: inset 0 0 10px #00000094, inset 0 1px 1px #0a0b0de0, 0px 1px #ffffff38;
+  --shadow-inner-soft: inset 0 0 6px rgba(0, 0, 0, 0.3);
   --r-t-col-width-min: 10%;
   --r-t-col-width-max: 40%;
 }
@@ -151,8 +158,7 @@
   background-color: var(--c-slate-800);
 }
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-inner-soft);
   background-color: rgba(255, 255, 255, 0.1647058824);
 }
 ::-webkit-scrollbar-thumb {
@@ -228,7 +234,7 @@ a {
   height: 36px;
   margin: 0;
   border-radius: 5px;
-  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0px 0px 0px 1px rgba(255, 255, 255, 0.09);
+  box-shadow: var(--shadow-outline);
   cursor: pointer;
   display: block;
   z-index: 3;
@@ -256,7 +262,7 @@ a {
   border-radius: 5px;
 }
 .menu-button:hover::before {
-  box-shadow: inset 2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0px 0px 0px 1px rgba(255, 255, 255, 0.09);
+  box-shadow: inset var(--shadow-outline);
   background: #2c3139;
 }
 .menu-header {
@@ -287,7 +293,7 @@ a {
   background-size: 44px;
   position: relative;
   text-decoration: none;
-  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0px 0px 0px 1px rgba(255, 255, 255, 0.09);
+  box-shadow: var(--shadow-outline);
   border-radius: 5px;
   transition: 1s;
 }
@@ -300,11 +306,11 @@ a {
   border-radius: 5px;
 }
 .menu-header-block-link:hover::before {
-  box-shadow: inset 2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0px 0px 0px 1px rgba(255, 255, 255, 0.09);
+  box-shadow: inset var(--shadow-outline);
   background: #2c3139;
 }
 .menu-sidebar {
-  box-shadow: var(--r-t-box-shadow);
+  box-shadow: var(--shadow-raised);
   display: block;
   width: 400px;
   top: 136px;
@@ -424,7 +430,7 @@ a {
   align-items: center;
   border-radius: 5px;
   color: #fff;
-  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0px 0px 0px 1px rgba(255, 255, 255, 0.09);
+  box-shadow: var(--shadow-outline);
   transition: all 0.25s ease-in;
   cursor: pointer;
   background-color: rgb(57.2216216216, 63.7405405405, 76.7783783784);
@@ -432,7 +438,7 @@ a {
 .nav a:focus, .nav a:hover,
 .nav label:focus,
 .nav label:hover {
-  box-shadow: inset 2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0px 0px 0px 1px rgba(255, 255, 255, 0.09);
+  box-shadow: inset var(--shadow-outline);
   background-color: rgb(63.7551351351, 71.0183783784, 85.5448648649);
 }
 
@@ -514,7 +520,7 @@ input[type=number] {
 .switchedBlock.block {
   position: relative;
   margin: 4px;
-  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.58), 0px 0px 0px 1px rgba(255, 255, 255, 0.09);
+  box-shadow: var(--shadow-outline);
 }
 .switchedBlock-label {
   display: flex;
@@ -648,9 +654,7 @@ input[type=number] {
   -moz-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   content: "";
-  -webkit-box-shadow: 1px 1px 3px 0px rgb(2, 4, 4);
-  -moz-box-shadow: 1px 1px 3px 0px rgb(2, 4, 4);
-  box-shadow: 1px 1px 3px 0px rgb(2, 4, 4);
+  box-shadow: var(--shadow-flat);
 }
 .clanList .tagify__tag__removeBtn:hover {
   color: #efefef;
@@ -676,7 +680,7 @@ input[type=number] {
 }
 .content-nav-is-open {
   width: calc(77% - 30px);
-  box-shadow: var(--r-t-box-shadow);
+  box-shadow: var(--shadow-raised);
   height: auto;
 }
 
@@ -883,8 +887,8 @@ a.statistics .statistics-value {
   font-size: 30px;
   padding: 12px;
   background: rgba(7.2923076923, 54.6923076923, 71.7076923077, 0.7294117647);
-  -webkit-box-shadow: var(--m-b-shadow-inset);
-  box-shadow: var(--m-b-shadow-inset);
+  -webkit-box-shadow: var(--shadow-inner-deep);
+  box-shadow: var(--shadow-inner-deep);
   -webkit-border-radius: 9px;
   border-radius: 9px;
 }
@@ -909,7 +913,7 @@ a.statistics .statistics-value {
   height: 64;
   padding: 5px;
   border-radius: 10px;
-  box-shadow: var(--m-b-shadow-inset);
+  box-shadow: var(--shadow-inner-deep);
 }
 
 .group-link {
@@ -917,7 +921,7 @@ a.statistics .statistics-value {
   width: auto;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: var(--m-b-shadow-inset);
+  box-shadow: var(--shadow-inner-deep);
   background: var(--c-grey-500);
   font-weight: 900;
   color: var(--c-slate-500);

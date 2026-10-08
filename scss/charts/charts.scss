@@ -1,12 +1,18 @@
-@use './../animation/checkbox-change-color-text' as *;
+@use "./../animation/checkbox-change-color-text" as *;
 
 .chart {
-  width: auto;
-  background-color: #0000006a;
-  box-shadow: rgb(69 69 69) 0px 3px 8px -1px;
   text-align: right;
   transition: 0.3s;
-
+  width: calc(100% - 10px);
+  padding: 14px;
+  color: black;
+  height: 200px;
+  box-shadow: var(--shadow-inner-deep);
+  background-color: var(--c-grey-500);
+  &-stats {
+    height: auto;
+    padding: 0px 0px 39px 5px;
+  }
   &-item-page {
     width: 790px;
     margin: 0px 11px 10px auto;
@@ -31,5 +37,12 @@
     font-size: 16px;
     border: none;
     height: 28px;
+  }
+  &-mini {
+    width: 90px;
+    margin: 0 auto;
+    padding: 0.2%;
+    box-shadow: var(--shadow-inner-deep);
+    background-color: var(--c-grey-500);
   }
 }

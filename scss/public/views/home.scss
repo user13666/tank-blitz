@@ -10,8 +10,8 @@
 
 :root {
   --c-white: #ffffff;
-  --c-cyan-400: #30b4e4;
-  --c-blue-dark: #0c7fa8;
+  --c-cyan-400: rgb(48, 180, 228);
+  --c-blue-dark: rgb(12, 127, 168);
   --c-blue-deep: #0c5a76;
 
   --c-slate-400: #414856;
@@ -30,9 +30,9 @@
   --c-black-alpha: #00000094;
   --c-grey-alpha: #ffffff38;
 
-  --r-t-box-shadow: 5px 5px 10px #242931, -4px -4px 8px #3c4351, inset 1px 1px 1px rgba(255, 255, 255, 0.1);
-  --m-b-shadow-inset: inset 0 0 10px var(--c-black-alpha), inset 0 1px 1px #0a0b0de0, 0px 1px var(--c-grey-alpha);
-
+  --shadow-raised: 5px 5px 10px #242931, -4px -4px 8px #3c4351, inset 1px 1px 1px rgba(255, 255, 255, 0.1);
+  --shadow-inner-deep: inset 0 0 10px #00000094, inset 0 1px 1px #0a0b0de0, 0px 1px #ffffff38;
+  --shadow-inner-soft: inset 0 0 6px rgba(0, 0, 0, 0.3);
   --r-t-col-width-min: 10%;
   --r-t-col-width-max: 40%;
 }
@@ -51,8 +51,7 @@ $config: (
   background-color: var(--c-slate-800);
 
   &-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-inner-soft);
     background-color: #ffffff2a;
   }
 
@@ -75,7 +74,7 @@ a {
   text-decoration: none;
 }
 
-@include page-ui($nav-bar-width: 250px, $c-heder: var(--c-slate-800), $c-bar-dark: #2c3139, $c-bar: #2c3139, $c-bar-light: #4f586a, $c-color: var(--c-white), $c-hover: var(--c-cyan-400), $n-box-shadow: var(--r-t-box-shadow));
+@include page-ui($nav-bar-width: 250px, $c-heder: var(--c-slate-800), $c-bar-dark: #2c3139, $c-bar: #2c3139, $c-bar-light: #4f586a, $c-color: var(--c-white), $c-hover: var(--c-cyan-400), $n-box-shadow: var(--shadow-raised));
 
 .content ul,
 .content li {
@@ -117,7 +116,7 @@ $c-yellow-gray: #0c5a76ba;
 
   &-nav-is-open {
     width: calc(77% - 30px);
-    box-shadow: var(--r-t-box-shadow);
+    box-shadow: var(--shadow-raised);
     height: auto;
   }
 }
@@ -163,8 +162,8 @@ a.statistics {
     font-size: 30px;
     padding: 12px;
     background: color.adjust($c-yellow-gray, $lightness: -10%);
-    -webkit-box-shadow: var(--m-b-shadow-inset);
-    box-shadow: var(--m-b-shadow-inset);
+    -webkit-box-shadow: var(--shadow-inner-deep);
+    box-shadow: var(--shadow-inner-deep);
     -webkit-border-radius: 9px;
     border-radius: 9px;
   }
@@ -193,7 +192,7 @@ a.statistics {
     height: 64;
     padding: 5px;
     border-radius: 10px;
-    box-shadow: var(--m-b-shadow-inset);
+    box-shadow: var(--shadow-inner-deep);
   }
 }
 
@@ -202,7 +201,7 @@ a.statistics {
   width: auto;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: var(--m-b-shadow-inset);
+  box-shadow: var(--shadow-inner-deep);
   background: var(--c-grey-500);
   font-weight: 900;
   color: var(--c-slate-500);

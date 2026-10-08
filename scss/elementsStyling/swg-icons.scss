@@ -4,6 +4,12 @@
   background-repeat: no-repeat;
 }
 
+.swg-winrate {
+  background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/winrate-color.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .swg-edit {
   background-image: url("chrome-extension://__MSG_@@extension_id__/images/svg/icons/edit_note_white_24dp.svg");
   background-repeat: no-repeat;
